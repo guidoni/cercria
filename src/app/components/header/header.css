@@ -1,0 +1,21 @@
+.navbar {
+    background-color: var(--cor-secundaria);
+    padding-top: 15px;
+    padding-bottom: 10px;
+    font-size: 18px;
+}
+
+.nav-item {
+    padding-right: 15px;
+}
+
+.navbar img {
+    width: 25px;
+    margin-right: 10px;
+    margin-left: 15px;
+}
+
+li {
+    display: flex;
+    align-items: center;
+}

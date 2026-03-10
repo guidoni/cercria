@@ -1,0 +1,118 @@
+<app-header></app-header>
+
+<div class="main-container">
+    <app-sidebar></app-sidebar>
+
+    <div class="form-list-panel">
+        <h2><b>Listagem de Funcionário</b></h2>
+
+        <form class="form-grid" #form="ngForm" (ngSubmit)="editar()">
+            <div class="form-buttons">
+                <a routerLink="/funcionario/listagem" class="btn">Listar</a>
+            </div>
+
+            <div class="campo grande">
+                <label>Nome completo *</label>
+                <input type="text" name="nome" placeholder="Digite o nome completo" required [(ngModel)]="funcionario.nome">
+            </div>
+
+            <div class="campo">
+                <label>Telefone *</label>
+                <input type="tel" name="telefone" placeholder="(xx) xxxxx-xxxx" mask="(00) 00000-0000" [(ngModel)]="funcionario.telefone">
+            </div>
+
+            <div class="campo">
+                <label>Data de nascimento *</label>
+                <input type="date" name="dataNascimento" required [(ngModel)]="funcionario.dataNascimento">
+            </div>
+
+            <div class="campo grande">
+                <label>E-mail *</label>
+                <input type="email" name="email" placeholder="Digite o e-mail" required [(ngModel)]="funcionario.email">
+            </div>
+
+            <div class="campo">
+                <label>CPF *</label>
+                <input type="text" name="cpf" placeholder="Digite o CPF" mask="000.000.000-00" [(ngModel)]="funcionario.cpf">
+            </div>
+
+            <div class="campo">
+                <label>RG *</label>
+                <input type="text" name="rg" placeholder="Digite o RG" required [(ngModel)]="funcionario.rg">
+            </div>
+
+            <div class="campo">
+                <label>Órgão Emissor *</label>
+                <input type="text" name="orgaoEmissor" required [(ngModel)]="funcionario.orgaoEmissor">
+            </div>
+
+            <div class="campo">
+                <label>UF *</label>
+                <input type="text" name="uf" maxlength="2" required [(ngModel)]="funcionario.uf">
+            </div>
+
+            <div class="campo">
+                <label>Cargo *</label>
+                <select name="cargo" required [(ngModel)]="funcionario.cargo">
+                    <option value="">Selecione</option>
+                    <option value="coordenador">Coordenador</option>
+                    <option value="psicologo">Psicólogo (a)</option>
+                    <option value="auxiliar-adm">Auxiliar Administrativo</option>
+                    <option value="enfermeiro">Enfermeiro (a)</option>
+                    <option value="cozinheiro">Cozinheiro (a)</option>
+                    <option value="auxiliar-coz">Auxiliar de cozinha</option>
+                    <option value="auxiliar-sg">Auxiliar de serviços gerais</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Escolaridade *</label>
+                <select name="escolaridade" required [(ngModel)]="funcionario.escolaridade">
+                    <option value="">Selecione</option>
+                    <option value="fund-incomp">Fundamental - Incompleto</option>
+                    <option value="fund-comp">Fundamental - Completo</option>
+                    <option value="medio-incomp">Médio - Incompleto</option>
+                    <option value="medio-comp">Médio - Completo</option>
+                    <option value="sup-incomp">Superior - Incompleto</option>
+                    <option value="sup-comp">Superior - Completo</option>
+                    <option value="pos-incomp">Pós-graduação - Incompleto</option>
+                    <option value="pos-comp">Pós-graduação - Completo</option>
+                    <option value="mestr-incomp">Mestrado - Incompleto</option>
+                    <option value="mestr-comp">Mestrado - Completo</option>
+                    <option value="dout-incomp">Doutorado - Incompleto</option>
+                    <option value="dout-comp">Doutorado - Completo</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Carga Horária *</label>
+                <input type="text" name="cargaHoraria" placeholder="Ex: 40h semanais" required [(ngModel)]="funcionario.cargaHoraria">
+            </div>
+
+            <div class="campo">
+                <label>Sexo *</label>
+                <select name="sexo" required [(ngModel)]="funcionario.sexo">
+                    <option value="">Selecione</option>
+                    <option value="fem">Feminino</option>
+                    <option value="mas">Masculino</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Data de admissão *</label>
+                <input type="date" name="dataAdmissao" required [(ngModel)]="funcionario.dataAdmissao">
+            </div>
+
+            <div class="campo">
+                <label>Data de saída</label>
+                <input type="date" name="dataSaida" [(ngModel)]="funcionario.dataSaida">
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" class="btn">Alterar</button>
+                <a routerLink="/funcionario/listagem" class="btn-voltar"><< Voltar</a>
+            </div>
+        </form>
+    
+    </div>
+</div>

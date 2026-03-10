@@ -1,0 +1,41 @@
+import { Component } from '@angular/core';
+import { RouterLink } from "@angular/router";
+import { FormsModule } from '@angular/forms';
+import { Header } from '../../../components/header/header'; 
+import { Sidebar } from '../../../components/sidebar/sidebar'; 
+import { Funcionario } from '../../../models/Funcionario';
+import { FuncionarioService } from '../../../services/funcionario/funcionario.service';
+import { NgxMaskDirective } from 'ngx-mask';
+
+@Component({
+  selector: 'app-funcionario-cadastro',
+  imports: [RouterLink, FormsModule, Header, Sidebar, NgxMaskDirective],
+  templateUrl: './funcionario-cadastro.html',
+  styleUrl: './funcionario-cadastro.css',
+})
+export class FuncionarioCadastro {
+    //JSON de funcionario
+    funcionarios:Funcionario[] = [];
+  
+    constructor(private servico:FuncionarioService){
+  
+    }
+    
+    //Objeto do tipo funcionário
+    funcionario = new Funcionario();
+
+    confirmarSenha: string = '';
+
+    //Método de cadastro
+    cadastrar(form:any):void{
+
+      this.servico.cadastrar(this.funcionario).subscribe(retorno => {this.funcionarios.push(retorno);
+
+        this.funcionario = new Funcionario();
+        form.reset();
+        this.confirmarSenha = '';
+
+        alert('Funcionario cadastrado!');
+      });
+    }
+}

@@ -1,0 +1,54 @@
+<app-header></app-header>
+
+<div class="main-container">
+    <app-sidebar></app-sidebar>
+    <div class="form-list-panel">
+        <h2><b>Relação de Funcionários</b></h2>
+        <div class="filters">
+            <label>
+                <input type="radio" name="status" value="todos" [(ngModel)]="filtroStatus">
+                Todos
+            </label>
+
+            <label>
+                <input type="radio" name="status" value="ativos" [(ngModel)]="filtroStatus">
+                Ativos
+            </label>
+
+            <label>
+                <input type="radio" name="status" value="inativos" [(ngModel)]="filtroStatus">
+                Inativos
+            </label>
+        </div>
+        <br>
+        <div class="btnExterno">
+            <a routerLink="/funcionario/cadastro" class="btn">+ Novo Funcionário</a>
+        </div>
+        <div class="list-panel">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (f of funcionarios(); track f.id) {
+                        <tr>
+                            <td>{{ f.nome }}</td>
+                            <td>
+                                <div class="buttons">
+                                    <a [routerLink]="['/funcionario/edicao', f.id]" class="btn">Editar</a>
+                                    <a (click)="excluir(f.id!)" class="btn">Excluir</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="btnExterno">
+            <a routerLink="/funcionario/cadastro" class="btn"><< Voltar</a>
+        </div>
+    </div>
+</div>
