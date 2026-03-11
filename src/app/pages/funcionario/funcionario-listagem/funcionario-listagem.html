@@ -1,7 +1,6 @@
 <app-header></app-header>
 
 <div class="main-container">
-    <app-sidebar></app-sidebar>
     <div class="form-list-panel">
         <h2><b>Relação de Funcionários</b></h2>
         <div class="filters">
@@ -33,9 +32,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (f of funcionarios(); track f.id) {
+                    @for (f of filtrarFuncionarios(); track f.id) {
                         <tr>
-                            <td>{{ f.nome }}</td>
+                            <td (click)="abrirDetalhes(f)" class="nome-click">
+                                {{ f.nome }}
+                            </td>
                             <td>
                                 <div class="buttons">
                                     <a [routerLink]="['/funcionario/edicao', f.id]" class="btn">Editar</a>
@@ -46,6 +47,29 @@
                     }
                 </tbody>
             </table>
+
+            @if(funcionarioSelecionado()) {
+                <div class="card-overlay">
+
+                    <div class="card-funcionario">
+
+                    <h2>{{ funcionarioSelecionado()?.nome }}</h2>
+
+                    <p><b>Telefone:</b> {{ funcionarioSelecionado()!.telefone | mask: '(00) 00000-0000' }}</p>
+                    <p><b>Email:</b> {{ funcionarioSelecionado()!.email }}</p>
+                    <p><b>CPF:</b> {{ funcionarioSelecionado()!.cpf | mask:'000.000.000-00' }}</p>
+                    <p><b>RG:</b> {{ funcionarioSelecionado()!.rg }}</p>
+                    <p><b>Cargo:</b> {{ funcionarioSelecionado()!.cargo }}</p>
+                    <p><b>Escolaridade:</b> {{ funcionarioSelecionado()!.escolaridade }}</p>
+                    <p><b>Carga Horária:</b> {{ funcionarioSelecionado()!.cargaHoraria + 'h'}}</p>
+                    <p><b>Sexo:</b> {{ funcionarioSelecionado()!.sexo }}</p>
+
+                    <button (click)="fecharDetalhes()" class="btn">Fechar</button>
+
+                    </div>
+
+                </div>
+            }
         </div>
         <div class="btnExterno">
             <a routerLink="/funcionario/cadastro" class="btn"><< Voltar</a>

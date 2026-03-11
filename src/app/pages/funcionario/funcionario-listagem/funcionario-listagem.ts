@@ -5,20 +5,21 @@ import { Header } from '../../../components/header/header';
 import { Sidebar } from '../../../components/sidebar/sidebar';
 import { Funcionario } from '../../../models/Funcionario'; 
 import { FuncionarioService } from '../../../services/funcionario/funcionario.service';
+import { NgxMaskPipe } from 'ngx-mask';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-funcionario-listagem',
-  imports: [RouterLink, FormsModule, Header, Sidebar, CommonModule],
+  imports: [RouterLink, FormsModule, Header, Sidebar, CommonModule, NgxMaskPipe],
   templateUrl: './funcionario-listagem.html',
   styleUrl: './funcionario-listagem.css',
 })
 
 export class FuncionarioListagem implements OnInit {
-    filtroStatus: string = 'todos';
     funcionarios = signal<Funcionario[]>([]); 
 
-    constructor(private servico: FuncionarioService) {} 
+    constructor(private servico: FuncionarioService, private toastr: ToastrService) {} 
 
     ngOnInit(): void {
         this.servico.selecionar().subscribe({
@@ -41,11 +42,38 @@ export class FuncionarioListagem implements OnInit {
             this.funcionarios.update(lista =>
                 lista.filter(f => f.id !== id)
             );
+            this.toastr.success("Funcionário excluído com sucesso!");
             },
             error: (err) => {
-            console.error("Erro ao excluir:", err);
+                console.error("Erro ao excluir:", err);
             }
         });
 
+    }
+
+    //Configuração do card
+    funcionarioSelecionado = signal<Funcionario | null>(null);
+
+    abrirDetalhes(funcionario: Funcionario){
+        this.funcionarioSelecionado.set(funcionario);
+    }
+
+    fecharDetalhes(){
+        this.funcionarioSelecionado.set(null);
+    }
+
+    //Filtro de status
+    filtroStatus: string = 'todos';
+
+    filtrarFuncionarios() {
+        if (this.filtroStatus === 'ativos') {
+            return this.funcionarios().filter(f => f.ativo);
+        }
+
+        if (this.filtroStatus === 'inativos') {
+            return this.funcionarios().filter(f => !f.ativo);
+        }
+
+        return this.funcionarios();
     }
 }

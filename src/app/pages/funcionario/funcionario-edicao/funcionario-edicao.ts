@@ -7,6 +7,7 @@ import { Funcionario } from '../../../models/Funcionario';
 import { FuncionarioService } from '../../../services/funcionario/funcionario.service';
 import { NgxMaskDirective } from 'ngx-mask';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-funcionario-edicao',
@@ -20,12 +21,13 @@ export class FuncionarioEdicao implements OnInit {
     constructor(
         private servico: FuncionarioService,
         private rota: ActivatedRoute,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef, 
+        private toastr: ToastrService
     ) {}
 
     editar(): void {
         this.servico.editar(this.funcionario).subscribe(() => {
-            alert("Funcionário atualizado com sucesso!");
+            this.toastr.success("Funcionário editado com sucesso!");
         });
     }
 

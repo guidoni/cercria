@@ -1,13 +1,13 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
-//import { provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideNgxMask } from 'ngx-mask';
 import { routes } from './app.routes';
-import { provideHttpClient, withFetch } from '@angular/common/http'; // <- adicione withFetch
+import { provideHttpClient } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    //provideBrowserGlobalErrorListeners(),
     provideRouter(
       routes,
       withInMemoryScrolling({
@@ -15,6 +15,8 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideNgxMask(),
-    provideHttpClient(withFetch()), // <- adicione withFetch()
+    provideHttpClient(),
+    provideAnimations(),
+    provideToastr()
   ]
 };

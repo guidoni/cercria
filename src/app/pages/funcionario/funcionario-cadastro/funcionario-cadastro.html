@@ -1,7 +1,6 @@
 <app-header></app-header>
 
 <div class="main-container">
-    <app-sidebar></app-sidebar>
 
     <div class="form-list-panel">
         <h2><b>Cadastro de Funcionário</b></h2>
@@ -55,13 +54,13 @@
                 <label>Cargo *</label>
                 <select name="cargo" required [(ngModel)]="funcionario.cargo">
                     <option value="">Selecione</option>
-                    <option value="coordenador">Coordenador</option>
-                    <option value="psicologo">Psicólogo (a)</option>
-                    <option value="auxiliar-adm">Auxiliar Administrativo</option>
-                    <option value="enfermeiro">Enfermeiro (a)</option>
-                    <option value="cozinheiro">Cozinheiro (a)</option>
-                    <option value="auxiliar-coz">Auxiliar de cozinha</option>
-                    <option value="auxiliar-sg">Auxiliar de serviços gerais</option>
+                    <option value="Coordenador">Coordenador</option>
+                    <option value="Psicólogo(a)">Psicólogo(a)</option>
+                    <option value="Auxiliar Administrativo">Auxiliar Administrativo</option>
+                    <option value="Enfermeiro(a)">Enfermeiro(a)</option>
+                    <option value="Cozinheiro(a)">Cozinheiro(a)</option>
+                    <option value="Auxiliar de cozinha">Auxiliar de cozinha</option>
+                    <option value="Auxiliar de serviços gerais">Auxiliar de serviços gerais</option>
                 </select>
             </div>
 
@@ -69,18 +68,18 @@
                 <label>Escolaridade *</label>
                 <select name="escolaridade" required [(ngModel)]="funcionario.escolaridade">
                     <option value="">Selecione</option>
-                    <option value="fund-incomp">Fundamental - Incompleto</option>
-                    <option value="fund-comp">Fundamental - Completo</option>
-                    <option value="medio-incomp">Médio - Incompleto</option>
-                    <option value="medio-comp">Médio - Completo</option>
-                    <option value="sup-incomp">Superior - Incompleto</option>
-                    <option value="sup-comp">Superior - Completo</option>
-                    <option value="pos-incomp">Pós-graduação - Incompleto</option>
-                    <option value="pos-comp">Pós-graduação - Completo</option>
-                    <option value="mestr-incomp">Mestrado - Incompleto</option>
-                    <option value="mestr-comp">Mestrado - Completo</option>
-                    <option value="dout-incomp">Doutorado - Incompleto</option>
-                    <option value="dout-comp">Doutorado - Completo</option>
+                    <option value="Fundamental Incompleto">Fundamental - Incompleto</option>
+                    <option value="Fundamental Completo">Fundamental - Completo</option>
+                    <option value="Médio Incompleto">Médio - Incompleto</option>
+                    <option value="Medio Completo">Médio - Completo</option>
+                    <option value="Superior Incompleto">Superior - Incompleto</option>
+                    <option value="Superior Completo">Superior - Completo</option>
+                    <option value="Pós-Graduação Incompleto">Pós-graduação - Incompleto</option>
+                    <option value="Pós-Graduação Completo">Pós-graduação - Completo</option>
+                    <option value="Mestrado Incompleto">Mestrado - Incompleto</option>
+                    <option value="Mestrado Completo">Mestrado - Completo</option>
+                    <option value="Doutorado Incompleto">Doutorado - Incompleto</option>
+                    <option value="Doutorado Completo">Doutorado - Completo</option>
                 </select>
             </div>
 
@@ -93,8 +92,8 @@
                 <label>Sexo *</label>
                 <select name="sexo" required [(ngModel)]="funcionario.sexo">
                     <option value="">Selecione</option>
-                    <option value="fem">Feminino</option>
-                    <option value="mas">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Masculino">Masculino</option>
                 </select>
             </div>
 
@@ -116,6 +115,14 @@
             <div class="campo">
                 <label>Confirmação de senha *</label>
                 <input type="password" name="confirmarSenha" required>
+            </div>
+
+            <div class="campo">
+                <label>Status *</label>
+                <select name="ativo" [(ngModel)]="funcionario.ativo">
+                    <option [ngValue]="true">Ativo</option>
+                    <option [ngValue]="false">Inativo</option>
+                </select>
             </div>
 
             <div class="form-buttons">

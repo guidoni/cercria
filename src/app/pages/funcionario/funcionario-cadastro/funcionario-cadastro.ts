@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterLink } from "@angular/router";
+import { RouterLink, Router } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { Header } from '../../../components/header/header'; 
 import { Sidebar } from '../../../components/sidebar/sidebar'; 
 import { Funcionario } from '../../../models/Funcionario';
 import { FuncionarioService } from '../../../services/funcionario/funcionario.service';
 import { NgxMaskDirective } from 'ngx-mask';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-funcionario-cadastro',
@@ -17,7 +18,7 @@ export class FuncionarioCadastro {
     //JSON de funcionario
     funcionarios:Funcionario[] = [];
   
-    constructor(private servico:FuncionarioService){
+    constructor(private servico:FuncionarioService, private toastr: ToastrService, private router: Router){
   
     }
     
@@ -35,7 +36,8 @@ export class FuncionarioCadastro {
         form.reset();
         this.confirmarSenha = '';
 
-        alert('Funcionario cadastrado!');
+        this.toastr.success("Funcionário cadastrado com sucesso!");
+        this.router.navigate(['/funcionario/listagem']);
       });
     }
 }

@@ -21,6 +21,8 @@ export class Funcionario {
     dataAdmissao: string = '';
     dataSaida?: string;
 
+    ativo: boolean = true;
+    
     senha: string = '';
 
 }
