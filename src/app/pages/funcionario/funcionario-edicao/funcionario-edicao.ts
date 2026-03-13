@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { Header } from '../../../components/header/header'; 
-import { Sidebar } from '../../../components/sidebar/sidebar'; 
 import { Funcionario } from '../../../models/Funcionario';
 import { FuncionarioService } from '../../../services/funcionario/funcionario.service';
 import { NgxMaskDirective } from 'ngx-mask';
@@ -11,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-funcionario-edicao',
-  imports: [RouterLink, FormsModule, Header, Sidebar, NgxMaskDirective],
+  imports: [RouterLink, FormsModule, Header, NgxMaskDirective],
   templateUrl: './funcionario-edicao.html',
   styleUrl: './funcionario-edicao.css',
 })
@@ -25,6 +24,7 @@ export class FuncionarioEdicao implements OnInit {
         private toastr: ToastrService
     ) {}
 
+    //Método de edição
     editar(): void {
         this.servico.editar(this.funcionario).subscribe(() => {
             this.toastr.success("Funcionário editado com sucesso!");

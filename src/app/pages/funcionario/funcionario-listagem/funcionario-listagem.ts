@@ -2,7 +2,6 @@ import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { Header } from '../../../components/header/header'; 
-import { Sidebar } from '../../../components/sidebar/sidebar';
 import { Funcionario } from '../../../models/Funcionario'; 
 import { FuncionarioService } from '../../../services/funcionario/funcionario.service';
 import { NgxMaskPipe } from 'ngx-mask';
@@ -11,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-funcionario-listagem',
-  imports: [RouterLink, FormsModule, Header, Sidebar, CommonModule, NgxMaskPipe],
+  imports: [RouterLink, FormsModule, Header, CommonModule, NgxMaskPipe],
   templateUrl: './funcionario-listagem.html',
   styleUrl: './funcionario-listagem.css',
 })

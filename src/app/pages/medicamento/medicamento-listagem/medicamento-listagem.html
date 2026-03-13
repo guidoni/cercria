@@ -1,0 +1,64 @@
+<app-header></app-header>
+
+<div class="main-container">
+    <div class="form-list-panel">
+        <h2><b>Relação de Medicamentos</b></h2>
+
+        <div class="top-actions">
+            <div class="filters">
+                <label for="filtro" >Filtrar por:</label>
+                <input type="text" name="nome">
+            </div>
+            <div class="btnExterno">
+                <a routerLink="/medicamento/cadastro" class="btn">+ Novo Medicamento</a>
+            </div>
+        </div>
+        
+        <div class="list-panel">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (m of medicamentos(); track m.id) {
+                        <tr>
+                            <td (click)="abrirDetalhes(m)" class="nome-click">
+                                {{ m.nome }}
+                            </td>
+
+                            <td>
+                                <div class="buttons">
+                                    <a [routerLink]="['/medicamento/edicao', m.id]" class="btn">Editar</a>
+                                    <a (click)="excluir(m.id!)" class="btn">Excluir</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @if(medicamentoSelecionado()) {
+                <div class="card-overlay">
+
+                    <div class="card-medicamento">
+
+                    <h2>{{ medicamentoSelecionado()?.nome }}</h2>
+
+                    <p><b>Data de validade:</b> {{ medicamentoSelecionado()!.dataValidade | date:'dd/MM/yyyy' }}</p>
+                    <p><b>Origem:</b> {{ medicamentoSelecionado()!.origem }}</p>
+
+                    <button (click)="fecharDetalhes()" class="btn">Fechar</button>
+
+                    </div>
+
+                </div>
+            }
+        </div>
+        <div class="btnExterno">
+            <a routerLink="/medicamento/cadastro" class="btn"><< Voltar</a>
+        </div>
+    </div>
+</div>

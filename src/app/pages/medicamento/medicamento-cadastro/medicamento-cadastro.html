@@ -1,0 +1,45 @@
+<app-header></app-header>
+
+<div class="main-container">
+
+    <div class="form-list-panel">
+        <h2><b>Cadastro de Medicamento</b></h2>
+
+        <form class="form-grid" #form="ngForm" (ngSubmit)="cadastrar(form)">
+            <div class="form-buttons">
+                <a routerLink="/medicamento/listagem" class="btn">Listar</a>
+            </div>
+
+            <div class="campo grande">
+                <label>Nome do medicamento *</label>
+                <input type="text" name="nome" placeholder="Digite o nome do medicamento" required [(ngModel)]="medicamento.nome">
+            </div>
+
+            <div class="campo">
+                <label>Data de validade *</label>
+                <input type="date" name="dataValidade" required [(ngModel)]="medicamento.dataValidade">
+            </div>
+
+            <div class="campo">
+                <label>Quantidade (unidade) *</label>
+                <input type="number" id="quantidade" name="quantidade" [(ngModel)]="medicamento.quantidade" min="1" step="1" required >
+            </div>
+
+            <div class="campo">
+                <label>Origem *</label>
+                <select name="origem" required [(ngModel)]="medicamento.origem">
+                    <option value="">Selecione</option>
+                    <option value="Prefeitura">Prefeitura</option>
+                    <option value="Farmácia Popular">Farmácia Popular</option>
+                </select>
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" class="btn">Salvar</button>
+                <button type="reset" class="btn">Limpar</button>
+                <a routerLink="/home" class="btn-voltar"><< Voltar</a>
+            </div>
+        </form>
+    
+    </div>
+</div>

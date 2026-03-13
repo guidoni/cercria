@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { RouterLink, Router } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { Header } from '../../../components/header/header'; 
-import { Sidebar } from '../../../components/sidebar/sidebar'; 
 import { Funcionario } from '../../../models/Funcionario';
 import { FuncionarioService } from '../../../services/funcionario/funcionario.service';
 import { NgxMaskDirective } from 'ngx-mask';
@@ -10,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-funcionario-cadastro',
-  imports: [RouterLink, FormsModule, Header, Sidebar, NgxMaskDirective],
+  imports: [RouterLink, FormsModule, Header, NgxMaskDirective],
   templateUrl: './funcionario-cadastro.html',
   styleUrl: './funcionario-cadastro.css',
 })

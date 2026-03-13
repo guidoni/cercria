@@ -56,6 +56,7 @@
                     <h2>{{ funcionarioSelecionado()?.nome }}</h2>
 
                     <p><b>Telefone:</b> {{ funcionarioSelecionado()!.telefone | mask: '(00) 00000-0000' }}</p>
+                    <p><b>Data de nascimento:</b> {{ funcionarioSelecionado()!.dataNascimento | mask: 'dd/MM/yyyy' }}</p>
                     <p><b>Email:</b> {{ funcionarioSelecionado()!.email }}</p>
                     <p><b>CPF:</b> {{ funcionarioSelecionado()!.cpf | mask:'000.000.000-00' }}</p>
                     <p><b>RG:</b> {{ funcionarioSelecionado()!.rg }}</p>

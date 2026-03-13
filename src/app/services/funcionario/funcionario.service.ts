@@ -18,6 +18,7 @@ export class FuncionarioService {
 
     }
 
+    //Método de listar
     selecionar(): Observable<Funcionario[]> {
       return this.http.get<Funcionario[]>(this.url + '/listagem')
         .pipe(
@@ -28,6 +29,7 @@ export class FuncionarioService {
         );
     }
 
+    //Método de cadastrar
     cadastrar(f: Funcionario): Observable<Funcionario> {
       return this.http.post<Funcionario>(this.url + '/cadastro', f)
         .pipe(
@@ -38,6 +40,7 @@ export class FuncionarioService {
         );
     }
 
+    //Método de editar
     editar(f: Funcionario): Observable<Funcionario> {
       return this.http.put<Funcionario>(this.url + '/edicao', f)
         .pipe(
@@ -52,6 +55,7 @@ export class FuncionarioService {
       return this.http.get<Funcionario>(this.url + '/' + id);
     }
 
+    //Método de remover
     remover(id:number):Observable<void>{
       return this.http.delete<void>(this.url + '/' + id);
     }

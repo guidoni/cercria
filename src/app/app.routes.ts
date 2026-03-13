@@ -5,6 +5,10 @@ import { FuncionarioListagem } from './pages/funcionario/funcionario-listagem/fu
 import { FuncionarioCadastro } from './pages/funcionario/funcionario-cadastro/funcionario-cadastro';
 import { FuncionarioEdicao } from './pages/funcionario/funcionario-edicao/funcionario-edicao';
 import { Notfound } from './pages/notfound/notfound';
+import { MedicamentoCadastro } from './pages/medicamento/medicamento-cadastro/medicamento-cadastro';
+import { MedicamentoEntradaSaida } from './pages/medicamento/medicamento-entrada-saida/medicamento-entrada-saida';
+import { MedicamentoListagem } from './pages/medicamento/medicamento-listagem/medicamento-listagem';
+import { MedicamentoEdicao } from './pages/medicamento/medicamento-edicao/medicamento-edicao';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,6 +20,15 @@ export const routes: Routes = [
         { path: 'listagem', component: FuncionarioListagem },
         { path: 'edicao/:id', component: FuncionarioEdicao }
     ]
+  },
+  {
+    path: 'medicamento',
+      children: [
+        { path: 'cadastro', component: MedicamentoCadastro },
+        { path: 'entrada-saida', component: MedicamentoEntradaSaida },
+        { path: 'listagem', component: MedicamentoListagem },
+        { path: 'edicao/:id', component: MedicamentoEdicao}
+      ]
   },
   { path: 'login', component: Login},
   { path: '**', component: Notfound }
