@@ -6,6 +6,7 @@ import { Medicamento } from '../../../models/Medicamento';
 import { MedicamentoService } from '../../../services/medicamento/medicamento.service';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-medicamento-listagem',
@@ -30,22 +31,29 @@ export class MedicamentoListagem implements OnInit{
     }
 
     excluir(id:number){
-        const confirmar = confirm("Tem certeza que deseja excluir este medicamento?");
-        if(!confirmar){
-            return; 
-        }
-        this.servico.remover(id).subscribe({
-            next: () => {
-            this.medicamentos.update(lista =>
-                lista.filter(m => m.id !== id)
-            );
-            this.toastr.success("Medicamento excluído com sucesso!");
-            },
-            error: (err) => {
-                console.error("Erro ao excluir:", err);
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: 'Esse medicamento será excluído!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, excluir',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+                this.servico.remover(id).subscribe({
+                    next: () => {
+                        this.medicamentos.update(lista =>
+                            lista.filter(m => m.id !== id)
+                        );
+                        this.toastr.success("Medicamento excluído com sucesso!");
+                    },
+                    error: (err) => {
+                        console.error("Erro ao excluir:", err);
+                    }
+                });
             }
         });
-
     }
 
     //Configuração do card
@@ -59,6 +67,6 @@ export class MedicamentoListagem implements OnInit{
         this.medicamentoSelecionado.set(null);
     }
 
-    //Filtro
+    //Filtro de status
    
 }

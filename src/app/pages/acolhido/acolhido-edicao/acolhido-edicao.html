@@ -1,0 +1,189 @@
+<app-header></app-header>
+
+<div class="main-container">
+  <div class="form-list-panel">
+    <h2><b>Edição de Acolhido</b></h2>
+
+    <form class="form-grid" #form="ngForm" (ngSubmit)="editar()">
+      <div class="form-buttons">
+        <a routerLink="/acolhido/listagem" class="btn">Listar</a>
+      </div>
+
+      <div class="campo grande">
+        <label>Nome completo *</label>
+        <input
+          type="text"
+          name="nome"
+          placeholder="Digite o nome completo"
+          required
+          [(ngModel)]="acolhido.nome"
+        />
+      </div>
+
+      <div class="campo">
+        <label>CPF *</label>
+        <input
+          type="text"
+          name="cpf"
+          mask="000.000.000-00"
+          placeholder="Digite o CPF"
+          [(ngModel)]="acolhido.cpf"
+        />
+      </div>
+
+      <div class="campo">
+        <label>Data de nascimento *</label>
+        <input type="date" name="dataNascimento" required [(ngModel)]="acolhido.dataNascimento" />
+      </div>
+
+      <div class="campo grande">
+        <label>Escola *</label>
+        <input
+          type="text"
+          name="escola"
+          placeholder="Digite a escola"
+          required
+          [(ngModel)]="acolhido.escola"
+        />
+      </div>
+
+      <div class="campo grande">
+        <label>Local Familiar</label>
+        <input
+          type="text"
+          name="localFamiliar"
+          placeholder="Digite o local familiar"
+          [(ngModel)]="acolhido.localFamiliar"
+        />
+      </div>
+
+      <div class="campo">
+        <label>Número do Processo</label>
+        <input type="text" name="numeroProcesso" [(ngModel)]="acolhido.numeroProcesso" />
+      </div>
+
+      <div class="campo">
+        <label>Vara</label>
+        <input type="text" name="vara" [(ngModel)]="acolhido.vara" />
+      </div>
+
+      <div class="campo">
+        <label>Data de entrada *</label>
+        <input type="date" name="dataEntrada" required [(ngModel)]="acolhido.dataEntrada" />
+      </div>
+
+      <div class="campo">
+        <label>Cor da pele *</label>
+        <select name="corPele" required [(ngModel)]="acolhido.corPele">
+          <option value="">Selecione</option>
+          <option value="Branca">Branca</option>
+          <option value="Parda">Parda</option>
+          <option value="Preta">Preta</option>
+          <option value="Amarela">Amarela</option>
+          <option value="Indígena">Indígena</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Data de saída</label>
+        <input type="date" name="dataSaida" [(ngModel)]="acolhido.dataSaida" />
+      </div>
+
+      <div class="campo grande">
+        <label>Deficiência</label>
+        <input
+          type="text"
+          name="deficiencia"
+          placeholder="Digite se houver"
+          [(ngModel)]="acolhido.deficiencia"
+        />
+      </div>
+
+      <div class="campo">
+        <label>PPCAAM</label>
+        <input type="text" name="ppcaam" [(ngModel)]="acolhido.ppcaam" />
+      </div>
+
+      <div class="campo grande">
+        <label>Medicamentos</label>
+
+        <div class="lista-medicamentos">
+          @for (m of medicamentos(); track m.id) {
+            <div class="item-medicamento">
+              <input
+                type="checkbox"
+                [checked]="acolhido.medicamentos.includes(m.id!)"
+                (change)="toggleMedicamento(m.id!)"
+              />
+              {{ m.nome }}
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>Tamanho Camiseta *</label>
+        <select name="tamanhoCamiseta" required [(ngModel)]="acolhido.tamanhoCamiseta">
+          <option value="">Selecione</option>
+          <option value="PP">PP</option>
+          <option value="P">P</option>
+          <option value="M">M</option>
+          <option value="G">G</option>
+          <option value="GG">GG</option>
+          <option value="XG">XG</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Tamanho Bermuda/Calça *</label>
+        <input
+          type="number"
+          name="tamanhoBermudaCalca"
+          min="10"
+          max="60"
+          step="2"
+          required
+          [(ngModel)]="acolhido.tamanhoBermudaCalca"
+        />
+      </div>
+
+      <div class="campo">
+        <label>Tamanho Calçado *</label>
+        <input
+          type="number"
+          name="tamanhoCalcado"
+          min="25"
+          max="45"
+          required
+          [(ngModel)]="acolhido.tamanhoCalcado"
+        />
+      </div>
+
+      <div class="campo">
+        <label>Tamanho Roupa Íntima *</label>
+        <select name="tamanhoRoupaIntima" required [(ngModel)]="acolhido.tamanhoRoupaIntima">
+          <option value="">Selecione</option>
+          <option value="PP">PP</option>
+          <option value="P">P</option>
+          <option value="M">M</option>
+          <option value="G">G</option>
+          <option value="GG">GG</option>
+          <option value="XG">XG</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Status *</label>
+        <select name="ativo" [(ngModel)]="acolhido.ativo">
+          <option [ngValue]="true">Ativo</option>
+          <option [ngValue]="false">Inativo</option>
+        </select>
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit" class="btn">Alterar</button>
+        <a routerLink="/acolhido/listagem" class="btn-voltar"><< Voltar</a>
+      </div>
+    </form>
+  </div>
+</div>

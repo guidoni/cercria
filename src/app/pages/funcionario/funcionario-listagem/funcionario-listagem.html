@@ -1,79 +1,80 @@
 <app-header></app-header>
 
 <div class="main-container">
-    <div class="form-list-panel">
-        <h2><b>Relação de Funcionários</b></h2>
-        <div class="filters">
-            <label>
-                <input type="radio" name="status" value="todos" [(ngModel)]="filtroStatus">
-                Todos
-            </label>
+  <div class="form-list-panel">
+    <h2><b>Relação de Funcionários</b></h2>
+    <div class="filters">
+      <label>
+        <input type="radio" name="status" value="todos" [(ngModel)]="filtroStatus" />
+        Todos
+      </label>
 
-            <label>
-                <input type="radio" name="status" value="ativos" [(ngModel)]="filtroStatus">
-                Ativos
-            </label>
+      <label>
+        <input type="radio" name="status" value="ativos" [(ngModel)]="filtroStatus" />
+        Ativos
+      </label>
 
-            <label>
-                <input type="radio" name="status" value="inativos" [(ngModel)]="filtroStatus">
-                Inativos
-            </label>
-        </div>
-        <br>
-        <div class="btnExterno">
-            <a routerLink="/funcionario/cadastro" class="btn">+ Novo Funcionário</a>
-        </div>
-        <div class="list-panel">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (f of filtrarFuncionarios(); track f.id) {
-                        <tr>
-                            <td (click)="abrirDetalhes(f)" class="nome-click">
-                                {{ f.nome }}
-                            </td>
-                            <td>
-                                <div class="buttons">
-                                    <a [routerLink]="['/funcionario/edicao', f.id]" class="btn">Editar</a>
-                                    <a (click)="excluir(f.id!)" class="btn">Excluir</a>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-
-            @if(funcionarioSelecionado()) {
-                <div class="card-overlay">
-
-                    <div class="card-funcionario">
-
-                    <h2>{{ funcionarioSelecionado()?.nome }}</h2>
-
-                    <p><b>Telefone:</b> {{ funcionarioSelecionado()!.telefone | mask: '(00) 00000-0000' }}</p>
-                    <p><b>Data de nascimento:</b> {{ funcionarioSelecionado()!.dataNascimento | mask: 'dd/MM/yyyy' }}</p>
-                    <p><b>Email:</b> {{ funcionarioSelecionado()!.email }}</p>
-                    <p><b>CPF:</b> {{ funcionarioSelecionado()!.cpf | mask:'000.000.000-00' }}</p>
-                    <p><b>RG:</b> {{ funcionarioSelecionado()!.rg }}</p>
-                    <p><b>Cargo:</b> {{ funcionarioSelecionado()!.cargo }}</p>
-                    <p><b>Escolaridade:</b> {{ funcionarioSelecionado()!.escolaridade }}</p>
-                    <p><b>Carga Horária:</b> {{ funcionarioSelecionado()!.cargaHoraria + 'h'}}</p>
-                    <p><b>Sexo:</b> {{ funcionarioSelecionado()!.sexo }}</p>
-
-                    <button (click)="fecharDetalhes()" class="btn">Fechar</button>
-
-                    </div>
-
-                </div>
-            }
-        </div>
-        <div class="btnExterno">
-            <a routerLink="/funcionario/cadastro" class="btn"><< Voltar</a>
-        </div>
+      <label>
+        <input type="radio" name="status" value="inativos" [(ngModel)]="filtroStatus" />
+        Inativos
+      </label>
     </div>
+    <br />
+    <div class="btnExterno">
+      <a routerLink="/funcionario/cadastro" class="btn">+ Novo Funcionário</a>
+    </div>
+    <div class="list-panel">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (f of filtrarFuncionarios(); track f.id) {
+            <tr>
+              <td (click)="abrirDetalhes(f)" class="nome-click">
+                {{ f.nome }}
+              </td>
+              <td>
+                <div class="buttons">
+                  <a [routerLink]="['/funcionario/edicao', f.id]" class="btn">Editar</a>
+                  <a (click)="excluir(f.id!)" class="btn">Excluir</a>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      @if (funcionarioSelecionado()) {
+        <div class="card-overlay">
+          <div class="card-funcionario">
+            <h2>{{ funcionarioSelecionado()?.nome }}</h2>
+
+            <p>
+              <b>Telefone:</b> {{ funcionarioSelecionado()!.telefone | mask: '(00) 00000-0000' }}
+            </p>
+            <p>
+              <b>Data de nascimento:</b>
+              {{ funcionarioSelecionado()!.dataNascimento | mask: 'dd/MM/yyyy' }}
+            </p>
+            <p><b>Email:</b> {{ funcionarioSelecionado()!.email }}</p>
+            <p><b>CPF:</b> {{ funcionarioSelecionado()!.cpf | mask: '000.000.000-00' }}</p>
+            <p><b>RG:</b> {{ funcionarioSelecionado()!.rg }}</p>
+            <p><b>Cargo:</b> {{ funcionarioSelecionado()!.cargo }}</p>
+            <p><b>Escolaridade:</b> {{ funcionarioSelecionado()!.escolaridade }}</p>
+            <p><b>Carga Horária:</b> {{ funcionarioSelecionado()!.cargaHoraria + 'h' }}</p>
+            <p><b>Sexo:</b> {{ funcionarioSelecionado()!.sexo }}</p>
+
+            <button (click)="fecharDetalhes()" class="btn">Fechar</button>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="btnExterno">
+      <a routerLink="/funcionario/cadastro" class="btn"><< Voltar</a>
+    </div>
+  </div>
 </div>

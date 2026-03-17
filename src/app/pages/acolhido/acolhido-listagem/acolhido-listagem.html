@@ -1,0 +1,125 @@
+<app-header></app-header>
+
+<div class="main-container">
+  <div class="form-list-panel">
+    <h2><b>Relação de Acolhidos</b></h2>
+
+    <div class="filters">
+      <label>
+        <input type="radio" name="status" value="todos" [(ngModel)]="filtroStatus" />
+        Todos
+      </label>
+
+      <label>
+        <input type="radio" name="status" value="ativos" [(ngModel)]="filtroStatus" />
+        Ativos
+      </label>
+
+      <label>
+        <input type="radio" name="status" value="inativos" [(ngModel)]="filtroStatus" />
+        Inativos
+      </label>
+    </div>
+
+    <br />
+
+    <div class="btnExterno">
+      <a routerLink="/acolhido/cadastro" class="btn"> + Novo Acolhido </a>
+    </div>
+
+    <div class="list-panel">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (a of filtrarAcolhidos(); track a.id) {
+            <tr>
+              <td (click)="abrirDetalhes(a)" class="nome-click">
+                {{ a.nome }}
+              </td>
+
+              <td>
+                <div class="buttons">
+                  <a [routerLink]="['/acolhido/edicao', a.id]" class="btn"> Editar </a>
+
+                  <a (click)="excluir(a.id!)" class="btn"> Excluir </a>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      <!-- CARD DETALHES -->
+
+      @if (acolhidoSelecionado()) {
+        <div class="card-overlay">
+          <div class="card-acolhido">
+            <h2>{{ acolhidoSelecionado()?.nome }}</h2>
+
+            <p>
+              <b>CPF:</b>
+              {{ acolhidoSelecionado()!.cpf | mask: '000.000.000-00' }}
+            </p>
+
+            <p>
+              <b>Data de nascimento:</b>
+              {{ acolhidoSelecionado()!.dataNascimento | date: 'dd/MM/yyyy' }}
+            </p>
+
+            <p>
+              <b>Escola:</b>
+              {{ acolhidoSelecionado()!.escola }}
+            </p>
+
+            <p>
+              <b>Data de entrada:</b>
+              {{ acolhidoSelecionado()!.dataEntrada | date: 'dd/MM/yyyy' }}
+            </p>
+
+            <p>
+              <b>Cor da pele:</b>
+              {{ acolhidoSelecionado()!.corPele }}
+            </p>
+
+            <p>
+              <b>Deficiência:</b>
+              {{ acolhidoSelecionado()!.deficiencia || 'Não se aplica' }}
+            </p>
+
+            <p>
+              <b>Tamanho Camiseta:</b>
+              {{ acolhidoSelecionado()!.tamanhoCamiseta || 'Não se aplica' }}
+            </p>
+
+            <p>
+              <b>Tamanho Bermuda/Calça:</b>
+              {{ acolhidoSelecionado()!.tamanhoBermudaCalca || 'Não se aplica' }}
+            </p>
+
+            <p>
+              <b>Tamanho Calçado:</b>
+              {{ acolhidoSelecionado()!.tamanhoCalcado || 'Não se aplica' }}
+            </p>
+
+            <p>
+              <b>Tamanho Roupa Íntima:</b>
+              {{ acolhidoSelecionado()!.tamanhoRoupaIntima || 'Não se aplica' }}
+            </p>
+
+            <button (click)="fecharDetalhes()" class="btn">Fechar</button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="btnExterno">
+      <a routerLink="/acolhido/cadastro" class="btn"> << Voltar </a>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,7 @@ import { FuncionarioService } from '../../../services/funcionario/funcionario.se
 import { NgxMaskPipe } from 'ngx-mask';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-funcionario-listagem',
@@ -32,22 +33,29 @@ export class FuncionarioListagem implements OnInit {
     }
 
     excluir(id:number){
-        const confirmar = confirm("Tem certeza que deseja excluir este funcionário?");
-        if(!confirmar){
-            return; 
-        }
-        this.servico.remover(id).subscribe({
-            next: () => {
-            this.funcionarios.update(lista =>
-                lista.filter(f => f.id !== id)
-            );
-            this.toastr.success("Funcionário excluído com sucesso!");
-            },
-            error: (err) => {
-                console.error("Erro ao excluir:", err);
-            }
-        });
-
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: 'Esse funcionário será excluído!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, excluir',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+    
+                if (result.isConfirmed) {
+                    this.servico.remover(id).subscribe({
+                        next: () => {
+                            this.funcionarios.update(lista =>
+                                lista.filter(m => m.id !== id)
+                            );
+                            this.toastr.success("Funcionário excluído com sucesso!");
+                        },
+                        error: (err) => {
+                            console.error("Erro ao excluir:", err);
+                        }
+                    });
+                }
+            });
     }
 
     //Configuração do card
