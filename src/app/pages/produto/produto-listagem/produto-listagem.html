@@ -1,0 +1,81 @@
+<app-header></app-header>
+
+<div class="main-container">
+  <div class="form-list-panel">
+    <h2><b>Relação de Produtos</b></h2>
+
+    <div class="top-actions">
+      <div class="filtros-linha">
+        <label>Nome: </label>
+        <input
+          type="text"
+          placeholder="Buscar por nome..."
+          [(ngModel)]="filtroNome"
+          (input)="filtrar()"
+        />
+
+        <label>Categoria: </label>
+        <select [(ngModel)]="filtroCategoria" (change)="filtrar()">
+          <option value="">Todas categorias</option>
+          <option value="Leguminosas">Leguminosas</option>
+          <option value="Verduras">Verduras</option>
+          <option value="Frutas">Frutas</option>
+          <option value="Não perecíveis">Não perecíveis</option>
+          <option value="Bebidas">Bebidas</option>
+          <option value="Produtos de limpeza">Produtos de limpeza</option>
+          <option value="Produtos de higiene pessoal">Produtos de higiene pessoal</option>
+        </select>
+
+        <button (click)="filtroNome = ''; filtroCategoria = ''; filtrar()">Limpar Filtro</button>
+      </div>
+
+      <a routerLink="/produto/cadastro" class="btn">+ Novo Produto</a>
+    </div>
+
+    <div class="list-panel">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of produtosFiltrados(); track p.id) {
+            <tr>
+              <td (click)="abrirDetalhes(p)" class="nome-click">
+                {{ p.nome }}
+              </td>
+              <td (click)="abrirDetalhes(p)" class="nome-click">
+                {{ p.categoria }}
+              </td>
+              <td>
+                <div class="buttons">
+                  <a [routerLink]="['/produto/edicao', p.id]" class="btn">Editar</a>
+                  <button (click)="excluir(p.id!)" class="btn">Excluir</button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      @if (produtoSelecionado()) {
+        <div class="card-overlay">
+          <div class="card-medicamento">
+            <h2>{{ produtoSelecionado()?.nome }}</h2>
+            <p><b>Categoria: </b>{{ produtoSelecionado()!.categoria }}</p>
+            <p><b>Rendimento:</b> {{ produtoSelecionado()!.rendimento || 'Não se aplica' }}</p>
+            <p><b>Unidade de medida: </b> {{ produtoSelecionado()!.unidadeMedida }}</p>
+
+            <button (click)="fecharDetalhes()" class="btn">Fechar</button>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="btnExterno">
+      <a routerLink="/produto/cadastro" class="btn"><< Voltar</a>
+    </div>
+  </div>
+</div>

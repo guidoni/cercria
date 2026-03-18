@@ -1,0 +1,71 @@
+<app-header></app-header>
+
+<div class="main-container">
+  <div class="form-list-panel">
+    <h2><b>Cadastro de Produtos</b></h2>
+
+    <form class="form-grid" #form="ngForm" (ngSubmit)="cadastrar(form)">
+      <div class="form-buttons">
+        <a routerLink="/produto/listagem" class="btn">Listar</a>
+      </div>
+
+      <div class="campo grande">
+        <label>Nome do produto *</label>
+        <input
+          type="text"
+          name="nome"
+          placeholder="Digite o nome do produto"
+          required
+          [(ngModel)]="produto.nome"
+        />
+      </div>
+
+      <div class="campo">
+        <label>Categoria *</label>
+        <select name="origem" required [(ngModel)]="produto.categoria">
+          <option value="">Selecione</option>
+          <option value="Leguminosas">Leguminosas</option>
+          <option value="Verduras">Verduras</option>
+          <option value="Frutas">Frutas</option>
+          <option value="Não perecíveis">Não perecíveis</option>
+          <option value="Bebidas">Bebidas</option>
+          <option value="Produtos de limpeza">Produtos de limpeza</option>
+          <option value="Produtos de higiene pessoal">Produtos de higiene pessoal</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Rendimento</label>
+        <input
+          type="number"
+          id="quantidade"
+          name="quantidade"
+          [(ngModel)]="produto.rendimento"
+          min="1"
+          step="1"
+          placeholder="Em porção"
+          required
+        />
+      </div>
+
+      <div class="campo">
+        <label>Unidade de medida *</label>
+        <select name="origem" required [(ngModel)]="produto.unidadeMedida">
+          <option value="">Selecione</option>
+          <option value="Quilograma">Quilograma (Kg)</option>
+          <option value="Grama">Gramas (g)</option>
+          <option value="Litro">Litros (L)</option>
+          <option value="Mililitro">Mililitros (ml)</option>
+          <option value="Unidade">Unidade (Un)</option>
+          <option value="Caixa">Caixa (Cx)</option>
+        </select>
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit" class="btn">Salvar</button>
+        <button type="reset" class="btn">Limpar</button>
+        <a routerLink="/home" class="btn-voltar"><< Voltar</a>
+      </div>
+    </form>
+  </div>
+</div>

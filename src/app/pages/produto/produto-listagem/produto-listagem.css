@@ -108,13 +108,21 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-th:first-child,
-td:first-child {
-  width: 70%;
+th:nth-child(1),
+td:nth-child(1) {
+  width: 60%;
 }
-th:last-child,
-td:last-child {
-  width: 30%;
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 20%;
+  text-align: center;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 20%;
+  text-align: center;
 }
 
 .buttons {
@@ -201,18 +209,27 @@ td:last-child {
 
 .filtros-linha {
   display: flex;
+  gap: 12px;
   align-items: center;
-  gap: 10px;
 }
 
 .filtros-linha input {
+  flex: 1;
+  min-width: 100px;
   padding: 10px 14px;
   border-radius: 8px;
   border: 1px solid #cdd5ee;
-  min-width: 200px;
 }
 
-.filtros-linha input:focus {
+.filtros-linha select {
+  width: 220px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cdd5ee;
+}
+
+.filtros-linha input:focus,
+.filtros-linha select:focus {
   border-color: var(--cor-secundaria);
   box-shadow: 0 0 0 2px rgba(30, 59, 138, 0.1);
   outline: none;

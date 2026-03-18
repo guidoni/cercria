@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Header } from '../../../components/header/header'; 
-import { RouterLink } from '@angular/router';
+import { Header } from '../../../components/header/header';
+import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MedicamentoService } from '../../../services/medicamento/medicamento.service';
 import { Medicamento } from '../../../models/Medicamento';
@@ -13,26 +13,28 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './medicamento-cadastro.css',
 })
 export class MedicamentoCadastro {
-    //JSON de funcionario
-    medicamentos:Medicamento[] = [];
-  
-    constructor(private servico:MedicamentoService, private toastr: ToastrService){
-  
-    }
-    
-    //Objeto do tipo funcionário
-    medicamento = new Medicamento();
+  //JSON de funcionario
+  medicamentos: Medicamento[] = [];
 
-    //Método de cadastro
-    cadastrar(form:any):void{
+  constructor(
+    private servico: MedicamentoService,
+    private toastr: ToastrService,
+    private router: Router,
+  ) {}
 
-      this.servico.cadastrar(this.medicamento).subscribe(retorno => {this.medicamentos.push(retorno);
+  //Objeto do tipo funcionário
+  medicamento = new Medicamento();
 
-        this.medicamento = new Medicamento();
-        form.reset();
+  //Método de cadastro
+  cadastrar(form: any): void {
+    this.servico.cadastrar(this.medicamento).subscribe((retorno) => {
+      this.medicamentos.push(retorno);
 
-        this.toastr.success("Medicamento cadastrado com sucesso!");
-        //this.router.navigate(['/medicamento/listagem']);
-      });
-    }
+      this.medicamento = new Medicamento();
+      form.reset();
+
+      this.toastr.success('Medicamento cadastrado com sucesso!');
+      this.router.navigate(['/medicamento/listagem']);
+    });
+  }
 }

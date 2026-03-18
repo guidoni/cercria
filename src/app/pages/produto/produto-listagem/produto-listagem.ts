@@ -2,32 +2,32 @@ import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Header } from '../../../components/header/header';
-import { Medicamento } from '../../../models/Medicamento';
-import { MedicamentoService } from '../../../services/medicamento/medicamento.service';
+import { Produto } from '../../../models/Produto';
+import { ProdutoService } from '../../../services/produto/produto.service';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-medicamento-listagem',
+  selector: 'app-produto-listagem',
   imports: [RouterLink, FormsModule, Header, CommonModule],
-  templateUrl: './medicamento-listagem.html',
-  styleUrl: './medicamento-listagem.css',
+  templateUrl: './produto-listagem.html',
+  styleUrl: './produto-listagem.css',
 })
-export class MedicamentoListagem implements OnInit {
-  medicamentos = signal<Medicamento[]>([]);
+export class ProdutoListagem {
+  produtos = signal<Produto[]>([]);
 
   constructor(
-    private servico: MedicamentoService,
+    private servico: ProdutoService,
     private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
     this.servico.selecionar().subscribe({
       next: (lista) => {
-        this.medicamentos.set(lista);
-        this.medicamentosFiltro.set(lista);
-        this.medicamentosFiltrados.set(lista);
+        this.produtos.set(lista);
+        this.produtosFiltro.set(lista);
+        this.produtosFiltrados.set(lista);
       },
       error: (err) => {
         console.error('erro:', err);
@@ -47,8 +47,8 @@ export class MedicamentoListagem implements OnInit {
       if (result.isConfirmed) {
         this.servico.remover(id).subscribe({
           next: () => {
-            this.medicamentos.update((lista) => lista.filter((m) => m.id !== id));
-            this.toastr.success('Medicamento excluído com sucesso!');
+            this.produtos.update((lista) => lista.filter((p) => p.id !== id));
+            this.toastr.success('Produto excluído com sucesso!');
           },
           error: (err) => {
             console.error('Erro ao excluir:', err);
@@ -59,29 +59,34 @@ export class MedicamentoListagem implements OnInit {
   }
 
   //Configuração do card
-  medicamentoSelecionado = signal<Medicamento | null>(null);
+  produtoSelecionado = signal<Produto | null>(null);
 
-  abrirDetalhes(medicamento: Medicamento) {
-    this.medicamentoSelecionado.set(medicamento);
+  abrirDetalhes(produto: Produto) {
+    this.produtoSelecionado.set(produto);
   }
 
   fecharDetalhes() {
-    this.medicamentoSelecionado.set(null);
+    this.produtoSelecionado.set(null);
   }
 
-  //Filtro
+  //Filtros
   filtroNome: string = '';
+  filtroCategoria: string = '';
 
-  medicamentosFiltro = signal<Medicamento[]>([]);
-  medicamentosFiltrados = signal<Medicamento[]>([]);
+  produtosFiltro = signal<Produto[]>([]);
+  produtosFiltrados = signal<Produto[]>([]);
 
   filtrar() {
-    const lista = this.medicamentosFiltro();
+    const lista = this.produtosFiltro();
 
-    const filtrados = lista.filter((m) =>
-      m.nome.toLowerCase().includes(this.filtroNome.toLowerCase()),
-    );
+    const filtrados = lista.filter((p) => {
+      const nomeOk = p.nome.toLowerCase().includes(this.filtroNome.toLowerCase());
 
-    this.medicamentosFiltrados.set(filtrados);
+      const categoriaOk = !this.filtroCategoria || p.categoria === this.filtroCategoria;
+
+      return nomeOk && categoriaOk;
+    });
+
+    this.produtosFiltrados.set(filtrados);
   }
 }

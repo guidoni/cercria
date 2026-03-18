@@ -1,33 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Medicamento } from '../../models/Medicamento';
+import { Produto } from '../../models/Produto';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MedicamentoService {
+export class ProdutoService {
   //URL da API
-  private url: string = 'http://localhost:8080/medicamento';
+  private url: string = 'http://localhost:8080/produto';
 
   //Construtor
   constructor(private http: HttpClient) {}
 
   //Método de cadastrar
-  cadastrar(m: Medicamento): Observable<Medicamento> {
-    return this.http.post<Medicamento>(this.url + '/cadastro', m).pipe(
+  cadastrar(p: Produto): Observable<Produto> {
+    return this.http.post<Produto>(this.url + '/cadastro', p).pipe(
       catchError((err) => {
-        console.error('Erro ao cadastrar medicamento', err);
+        console.error('Erro ao cadastrar produto', err);
         return throwError(() => err);
       }),
     );
   }
 
   //Método de listar
-  selecionar(): Observable<Medicamento[]> {
-    return this.http.get<Medicamento[]>(this.url + '/listagem').pipe(
+  selecionar(): Observable<Produto[]> {
+    return this.http.get<Produto[]>(this.url + '/listagem').pipe(
       catchError((err) => {
         console.error('Erro ao listar medicamentos', err);
         return throwError(() => err);
@@ -36,17 +36,17 @@ export class MedicamentoService {
   }
 
   //Método de editar
-  editar(m: Medicamento): Observable<Medicamento> {
-    return this.http.put<Medicamento>(this.url + '/edicao', m).pipe(
+  editar(p: Produto): Observable<Produto> {
+    return this.http.put<Produto>(this.url + '/edicao', p).pipe(
       catchError((err) => {
-        console.error('Erro ao editar medicamento', err);
+        console.error('Erro ao editar produto', err);
         return throwError(() => err);
       }),
     );
   }
 
-  buscarPorId(id: number): Observable<Medicamento> {
-    return this.http.get<Medicamento>(this.url + '/' + id);
+  buscarPorId(id: number): Observable<Produto> {
+    return this.http.get<Produto>(this.url + '/' + id);
   }
 
   //Método de remover
