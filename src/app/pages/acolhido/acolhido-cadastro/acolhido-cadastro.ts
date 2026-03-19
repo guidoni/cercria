@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { Header } from '../../../components/header/header';
+import { Sidebar } from '../../../components/sidebar/sidebar';
 import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +12,7 @@ import { AcolhidoService } from '../../../services/acolhido/acolhido.service';
 
 @Component({
   selector: 'app-acolhido-cadastro',
-  imports: [RouterLink, FormsModule, Header, NgxMaskDirective],
+  imports: [RouterLink, FormsModule, Header, NgxMaskDirective, Sidebar],
   templateUrl: './acolhido-cadastro.html',
   styleUrl: './acolhido-cadastro.css',
 })

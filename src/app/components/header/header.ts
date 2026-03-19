@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { SidebarService } from '../../services/sidebar/sidebar.service';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +10,6 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './header.css',
 })
 export class Header {
-
   usuario = 'Faça seu Login';
-  
-
+  sidebarService = inject(SidebarService);
 }

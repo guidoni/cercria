@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 import { Header } from '../../../components/header/header';
+import { Sidebar } from '../../../components/sidebar/sidebar';
 import { Acolhido } from '../../../models/Acolhido';
 import { AcolhidoService } from '../../../services/acolhido/acolhido.service';
 import { NgxMaskDirective } from 'ngx-mask';
@@ -15,7 +16,7 @@ import { MedicamentoService } from '../../../services/medicamento/medicamento.se
 
 @Component({
   selector: 'app-acolhido-edicao',
-  imports: [RouterLink, FormsModule, Header, NgxMaskDirective, CommonModule],
+  imports: [RouterLink, FormsModule, Header, NgxMaskDirective, CommonModule, Sidebar],
   templateUrl: './acolhido-edicao.html',
   styleUrl: './acolhido-edicao.css',
 })

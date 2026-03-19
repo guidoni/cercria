@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Header } from '../../../components/header/header';
+import { Sidebar } from '../../../components/sidebar/sidebar';
 import { MedicamentoService } from '../../../services/medicamento/medicamento.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -9,7 +10,7 @@ import { Medicamento } from '../../../models/Medicamento';
 
 @Component({
   selector: 'app-medicamento-edicao',
-  imports: [RouterLink, FormsModule, Header],
+  imports: [RouterLink, FormsModule, Header, Sidebar],
   templateUrl: './medicamento-edicao.html',
   styleUrl: './medicamento-edicao.css',
 })

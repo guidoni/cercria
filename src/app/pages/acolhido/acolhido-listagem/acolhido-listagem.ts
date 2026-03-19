@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Header } from '../../../components/header/header';
+import { Sidebar } from '../../../components/sidebar/sidebar';
 import { Acolhido } from '../../../models/Acolhido';
 import { NgxMaskPipe } from 'ngx-mask';
 import { CommonModule } from '@angular/common';
@@ -11,7 +12,7 @@ import { AcolhidoService } from '../../../services/acolhido/acolhido.service';
 
 @Component({
   selector: 'app-acolhido-listagem',
-  imports: [RouterLink, FormsModule, Header, CommonModule, NgxMaskPipe],
+  imports: [RouterLink, FormsModule, Header, CommonModule, NgxMaskPipe, Sidebar],
   templateUrl: './acolhido-listagem.html',
   styleUrl: './acolhido-listagem.css',
 })

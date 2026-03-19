@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Header } from '../../../components/header/header';
+import { Sidebar } from '../../../components/sidebar/sidebar';
 import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MedicamentoService } from '../../../services/medicamento/medicamento.service';
@@ -8,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-medicamento-cadastro',
-  imports: [Header, RouterLink, FormsModule],
+  imports: [Header, RouterLink, FormsModule, Sidebar],
   templateUrl: './medicamento-cadastro.html',
   styleUrl: './medicamento-cadastro.css',
 })

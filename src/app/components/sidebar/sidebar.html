@@ -1,38 +1,30 @@
-<div class="content">
-  <div class="sidebar">
-    <div class="menu-item" routerLinkActive="ativo" routerLink="/home">
-      <img src="/assets/casa_navbar.png" />
-      <span>Início</span>
-    </div>
-
-    <div class="menu-item" routerLinkActive="ativo" routerLink="/funcionario/cadastro">
-      <img src="/assets/user.png" />
-      <span>Funcionários</span>
-    </div>
-
-    <div class="menu-item" routerLinkActive="ativo" routerLink="/acolhido/cadastro">
-      <img src="/assets/acolhidos_icone.png" />
-      <span>Acolhidos</span>
-    </div>
-
-    <div class="menu-item" routerLinkActive="ativo" routerLink="/medicamento/cadastro">
-      <img src="/assets/remedios_icone.png" />
-      <span>Medicamentos</span>
-    </div>
-
-    <div class="menu-item" routerLinkActive="ativo" routerLink="/produto/cadastro">
-      <img src="/assets/estoque_icone.png" />
-      <span>Estoque</span>
-    </div>
-
-    <div class="menu-item" routerLinkActive="ativo">
-      <img src="/assets/calendario_icone.png" />
-      <span>Agenda</span>
-    </div>
-
-    <div class="menu-item" routerLinkActive="ativo">
-      <img src="/assets/relatorio_icone.png" />
-      <span>Relatórios</span>
-    </div>
+<div class="sidebar" [class.aberta]="sidebarService.aberta()">
+  <div class="menu-item" routerLinkActive="ativo" routerLink="/home">
+    <img src="/assets/casa_navbar.png" />
+    <span>Início</span>
+  </div>
+  <div class="menu-item" routerLinkActive="ativo" routerLink="/funcionario/cadastro">
+    <img src="/assets/user.png" />
+    <span>Funcionários</span>
+  </div>
+  <div class="menu-item" routerLinkActive="ativo" routerLink="/acolhido/cadastro">
+    <img src="/assets/acolhidos_icone.png" />
+    <span>Acolhidos</span>
+  </div>
+  <div class="menu-item" routerLinkActive="ativo" routerLink="/medicamento/cadastro">
+    <img src="/assets/remedios_icone.png" />
+    <span>Medicamentos</span>
+  </div>
+  <div class="menu-item" routerLinkActive="ativo" routerLink="/produto/cadastro">
+    <img src="/assets/estoque_icone.png" />
+    <span>Estoque</span>
+  </div>
+  <div class="menu-item" routerLinkActive="ativo">
+    <img src="/assets/calendario_icone.png" />
+    <span>Agenda</span>
+  </div>
+  <div class="menu-item" routerLinkActive="ativo">
+    <img src="/assets/relatorio_icone.png" />
+    <span>Relatórios</span>
   </div>
 </div>

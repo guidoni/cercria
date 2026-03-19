@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Header } from '../../../components/header/header';
+import { Sidebar } from '../../../components/sidebar/sidebar';
 import { Medicamento } from '../../../models/Medicamento';
 import { MedicamentoService } from '../../../services/medicamento/medicamento.service';
 import { CommonModule } from '@angular/common';
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-medicamento-listagem',
-  imports: [RouterLink, FormsModule, Header, CommonModule],
+  imports: [RouterLink, FormsModule, Header, CommonModule, Sidebar],
   templateUrl: './medicamento-listagem.html',
   styleUrl: './medicamento-listagem.css',
 })
