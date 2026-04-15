@@ -36,7 +36,8 @@
 
               <td>
                 <div class="buttons">
-                  <a [routerLink]="['/medicamento/edicao', m.id]" class="btn">Editar</a>
+                  <a [routerLink]="['/medicamento/estoque', m.id]" class="btnEstoque">Estoque</a>
+                  <a [routerLink]="['/medicamento/edicao', m.id]" class="btn-editar">Editar</a>
                   <button (click)="excluir(m.id!)" class="btn">Excluir</button>
                 </div>
               </td>
@@ -51,10 +52,10 @@
             <h2>{{ medicamentoSelecionado()?.nome }}</h2>
 
             <p>
-              <b>Data de validade:</b>
-              {{ medicamentoSelecionado()!.dataValidade | date: 'dd/MM/yyyy' }}
+              <b>Unidade de medida:</b>
+              {{ medicamentoSelecionado()!.unidadeMedida }}
             </p>
-            <p><b>Origem:</b> {{ medicamentoSelecionado()!.origem }}</p>
+            <p><b>Categoria:</b> {{ medicamentoSelecionado()!.categoria }}</p>
 
             <button (click)="fecharDetalhes()" class="btn">Fechar</button>
           </div>

@@ -1,0 +1,276 @@
+<app-header></app-header>
+<div class="main-container">
+  <app-sidebar></app-sidebar>
+
+  <div class="page-content">
+    <div class="med-header">
+      <div *ngIf="medicamento as m">
+        <h2>{{ m.nome }}</h2>
+        <span class="badge-categoria">{{ m.categoria }}</span>
+      </div>
+      <a routerLink="/medicamento/listagem" class="btn-voltar">← Voltar</a>
+    </div>
+
+    <!-- Cards -->
+    <div class="cards-row">
+      <div class="metric-card">
+        <div class="metric-label">Total de entradas</div>
+        <div class="metric-val entradas">{{ totalEntradas }}</div>
+        <div class="metric-unit">{{ medicamento.unidadeMedida }}</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Total de saídas</div>
+        <div class="metric-val saidas">{{ totalSaidas }}</div>
+        <div class="metric-unit">{{ medicamento.unidadeMedida }}</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Estoque atual</div>
+        <div class="metric-val atual">{{ estoqueAtual }}</div>
+        <div class="metric-unit">{{ medicamento.unidadeMedida }}</div>
+      </div>
+    </div>
+
+    <!-- Abas -->
+    <div class="tabs">
+      <div class="tab" [class.ativo]="abaAtiva === 'entrada'" (click)="trocarAba('entrada')">
+        Entrada
+      </div>
+      <div class="tab" [class.ativo]="abaAtiva === 'saida'" (click)="trocarAba('saida')">Saída</div>
+    </div>
+
+    <div class="panel">
+      <!-- ENTRADA -->
+      @if (abaAtiva === 'entrada') {
+        <div class="panel-body">
+          <div class="section-title">Registrar nova entrada</div>
+
+          <form #formEntrada="ngForm" (ngSubmit)="salvarEntrada()" class="form-grid">
+            <!-- Quantidade -->
+            <div class="campo">
+              <label>Quantidade *</label>
+              <input
+                type="number"
+                name="quantidade"
+                required
+                min="1"
+                [(ngModel)]="novaEntrada.quantidade"
+              />
+            </div>
+
+            <!-- Data de entrada -->
+            <div class="campo">
+              <label>Data de entrada *</label>
+              <input
+                type="date"
+                name="dataEntrada"
+                required
+                [(ngModel)]="novaEntrada.dataEntrada"
+              />
+            </div>
+
+            <!-- Data de validade -->
+            <div class="campo">
+              <label>Data de validade *</label>
+              <input
+                type="date"
+                name="dataValidade"
+                required
+                [(ngModel)]="novaEntrada.dataValidade"
+              />
+            </div>
+
+            <!-- Origem -->
+            <div class="campo">
+              <label>Origem *</label>
+              <select name="origem" required [(ngModel)]="novaEntrada.origem">
+                <option value="">Selecione</option>
+                <option value="Prefeitura">Prefeitura</option>
+                <option value="Farmácia popular">Farmácia popular</option>
+              </select>
+            </div>
+
+            <!-- Responsável -->
+            <div class="campo">
+              <label>Responsável *</label>
+              <select name="responsavel" required [(ngModel)]="novaEntrada.responsavel">
+                <option value="">Selecione</option>
+                <option *ngFor="let a of funcionarios" [value]="a.nome">
+                  {{ a.nome }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-limpar" (click)="limparFormEntrada()">Limpar</button>
+              <button type="submit" class="btn" [disabled]="formEntrada.invalid">Salvar</button>
+            </div>
+          </form>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Data entrada</th>
+                <th>Quantidade</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (e of entradas; track e.id) {
+                <tr>
+                  <td>{{ e.dataEntrada | date: 'dd/MM/yyyy' }}</td>
+                  <td class="entrada">+{{ e.quantidade }}</td>
+                  <td>
+                    <div class="buttons">
+                      <button (click)="editarEntrada(e)" class="btn-ed">Editar</button>
+                      <button (click)="abrirDetalhesEntrada(e)" class="btn-det">Detalhes</button>
+                    </div>
+                  </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="6" class="empty">Nenhuma entrada registrada.</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+
+          <!-- Modal de detalhes -->
+          @if (entradaSelecionada) {
+            <div class="card-overlay">
+              <div class="card-detalhe">
+                <h3>Detalhes da Entrada</h3>
+                <p><b>Quantidade:</b> {{ entradaSelecionada.quantidade }}</p>
+                <p>
+                  <b>Data de entrada:</b> {{ entradaSelecionada.dataEntrada | date: 'dd/MM/yyyy' }}
+                </p>
+                <p>
+                  <b>Data de validade:</b>
+                  {{ entradaSelecionada.dataValidade | date: 'dd/MM/yyyy' }}
+                </p>
+                <p><b>Origem:</b> {{ entradaSelecionada.origem }}</p>
+                <p><b>Responsável:</b> {{ entradaSelecionada.responsavel }}</p>
+                <button (click)="fecharDetalhes()" class="btn">Fechar</button>
+              </div>
+            </div>
+          }
+        </div>
+      }
+
+      <!-- SAÍDA -->
+      @if (abaAtiva === 'saida') {
+        <div class="panel-body">
+          <div class="section-title">Registrar nova saída</div>
+
+          <form #formSaida="ngForm" (ngSubmit)="salvarSaida()" class="form-grid">
+            <!-- Acolhido -->
+            <div class="campo">
+              <label>Acolhido *</label>
+              <select name="acolhidoId" required [(ngModel)]="acolhidoSelecionadoId">
+                <option [ngValue]="null">Selecione</option>
+                <option *ngFor="let a of acolhidos" [ngValue]="a.id">
+                  {{ a.nome }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Data de saída -->
+            <div class="campo">
+              <label>Data de saída *</label>
+              <input type="date" name="dataSaida" required [(ngModel)]="novaSaida.dataSaida" />
+            </div>
+
+            <!-- Horário -->
+            <div class="campo">
+              <label>Horário *</label>
+              <input type="time" name="horaSaida" required [(ngModel)]="novaSaida.horaSaida" />
+            </div>
+
+            <!-- Quantidade -->
+            <div class="campo">
+              <label>Quantidade *</label>
+              <input
+                type="number"
+                name="quantidade"
+                required
+                min="1"
+                [(ngModel)]="novaSaida.quantidade"
+              />
+            </div>
+
+            <!-- Motivo -->
+            <div class="campo">
+              <label>Motivo *</label>
+              <select name="motivo" required [(ngModel)]="novaSaida.motivo">
+                <option value="">Selecione</option>
+                <option value="Uso regular">Uso regular</option>
+                <option value="Emergência">Emergência</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+
+            <!-- Responsável -->
+            <div class="campo">
+              <label>Responsável *</label>
+              <select name="responsavel" required [(ngModel)]="novaSaida.responsavel">
+                <option value="">Selecione</option>
+                <option *ngFor="let a of funcionarios" [value]="a.nome">
+                  {{ a.nome }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-limpar" (click)="limparFormSaida()">Limpar</button>
+              <button type="submit" class="btn" [disabled]="formSaida.invalid">Salvar</button>
+            </div>
+          </form>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Data Saída</th>
+                <th>Quantidade</th>
+                <th>Acolhido</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of saidas">
+                <td>{{ s.dataSaida | date: 'dd/MM/yyyy' }}</td>
+                <td class="saida">-{{ s.quantidade }}</td>
+                <td>{{ s.acolhido?.nome }}</td>
+                <td>
+                  <div class="buttons">
+                    <button (click)="editarSaida(s)" class="btn-ed">Editar</button>
+                    <button (click)="abrirDetalhesSaida(s)" class="btn-det">Detalhes</button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Mensagem quando não houver registros -->
+              <tr *ngIf="saidas.length === 0">
+                <td colspan="6" class="empty">Nenhuma saída cadastrada.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Modal de detalhes -->
+        @if (saidaSelecionada) {
+          <div class="card-overlay">
+            <div class="card-detalhe">
+              <h3>Detalhes da Saída</h3>
+              <p><b>Quantidade:</b> {{ saidaSelecionada.quantidade }}</p>
+              <p><b>Data de entrada:</b> {{ saidaSelecionada.dataSaida | date: 'dd/MM/yyyy' }}</p>
+              <p><b>Acolhido:</b> {{ saidaSelecionada.acolhido?.nome }}</p>
+              <p><b>Hora:</b> {{ saidaSelecionada.horaSaida }}</p>
+              <p><b>Responsável:</b> {{ saidaSelecionada.responsavel }}</p>
+              <p><b>Motivo:</b> {{ saidaSelecionada.motivo }}</p>
+              <button (click)="fecharDetalhesSaida()" class="btn">Fechar</button>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

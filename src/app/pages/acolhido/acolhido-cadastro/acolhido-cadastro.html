@@ -18,7 +18,12 @@
           placeholder="Digite o nome completo"
           required
           [(ngModel)]="acolhido.nome"
+          #nome="ngModel"
         />
+
+        @if (nome.invalid && nome.touched) {
+          <small class="erro">Nome é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
@@ -29,12 +34,27 @@
           mask="000.000.000-00"
           placeholder="Digite o CPF"
           [(ngModel)]="acolhido.cpf"
+          #cpf="ngModel"
         />
+
+        @if (cpf.invalid && cpf.touched) {
+          <small class="erro">CPF é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
         <label>Data de nascimento *</label>
-        <input type="date" name="dataNascimento" required [(ngModel)]="acolhido.dataNascimento" />
+        <input
+          type="date"
+          name="dataNascimento"
+          required
+          [(ngModel)]="acolhido.dataNascimento"
+          #dataNascimento="ngModel"
+        />
+
+        @if (dataNascimento.invalid && dataNascimento.touched) {
+          <small class="erro">Data de nascimento é obrigatório</small>
+        }
       </div>
 
       <div class="campo grande">
@@ -45,7 +65,12 @@
           placeholder="Digite a escola"
           required
           [(ngModel)]="acolhido.escola"
+          #escola="ngModel"
         />
+
+        @if (escola.invalid && escola.touched) {
+          <small class="erro">Escola é obrigatória</small>
+        }
       </div>
 
       <div class="campo grande">
@@ -75,7 +100,7 @@
 
       <div class="campo">
         <label>Cor da pele *</label>
-        <select name="corPele" required [(ngModel)]="acolhido.corPele">
+        <select name="corPele" required [(ngModel)]="acolhido.corPele" #corPele="ngModel">
           <option value="">Selecione</option>
           <option value="Branca">Branca</option>
           <option value="Parda">Parda</option>
@@ -124,7 +149,12 @@
 
       <div class="campo">
         <label>Tamanho Camiseta *</label>
-        <select name="tamanhoCamiseta" required [(ngModel)]="acolhido.tamanhoCamiseta">
+        <select
+          name="tamanhoCamiseta"
+          required
+          [(ngModel)]="acolhido.tamanhoCamiseta"
+          #tamanho="ngModel"
+        >
           <option value="">Selecione</option>
           <option value="PP">PP</option>
           <option value="P">P</option>
@@ -133,6 +163,10 @@
           <option value="GG">GG</option>
           <option value="XG">XG</option>
         </select>
+
+        @if (tamanho.invalid && tamanho.touched) {
+          <small class="erro">Tamanho é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
@@ -144,7 +178,12 @@
           max="60"
           required
           [(ngModel)]="acolhido.tamanhoBermudaCalca"
+          #tamanho="ngModel"
         />
+
+        @if (tamanho.invalid && tamanho.touched) {
+          <small class="erro">Tamanho é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
@@ -156,12 +195,22 @@
           max="45"
           required
           [(ngModel)]="acolhido.tamanhoCalcado"
+          #tamanho="ngModel"
         />
+
+        @if (tamanho.invalid && tamanho.touched) {
+          <small class="erro">Tamanho é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
         <label>Tamanho Roupa Íntima *</label>
-        <select name="tamanhoRoupaIntima" required [(ngModel)]="acolhido.tamanhoRoupaIntima">
+        <select
+          name="tamanhoRoupaIntima"
+          required
+          [(ngModel)]="acolhido.tamanhoRoupaIntima"
+          #tamanho="ngModel"
+        >
           <option value="">Selecione</option>
           <option value="PP">PP</option>
           <option value="P">P</option>
@@ -170,18 +219,26 @@
           <option value="GG">GG</option>
           <option value="XG">XG</option>
         </select>
+
+        @if (tamanho.invalid && tamanho.touched) {
+          <small class="erro">Tamanho é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
         <label>Status *</label>
-        <select name="ativo" [(ngModel)]="acolhido.ativo">
+        <select name="ativo" [(ngModel)]="acolhido.ativo" #status="ngModel">
           <option [ngValue]="true">Ativo</option>
           <option [ngValue]="false">Inativo</option>
         </select>
+
+        @if (status.invalid && status.touched) {
+          <small class="erro">Status é obrigatório</small>
+        }
       </div>
 
       <div class="form-buttons">
-        <button type="submit" class="btn">Salvar</button>
+        <button type="submit" class="btn" [disabled]="form.invalid">Salvar</button>
         <button type="reset" class="btn">Limpar</button>
         <a routerLink="/home" class="btn-voltar"><< Voltar</a>
       </div>

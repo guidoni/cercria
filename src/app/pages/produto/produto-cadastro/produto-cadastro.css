@@ -95,3 +95,10 @@ a {
   background-color: white;
   color: var(--cor-secundaria);
 }
+
+.erro {
+  color: #d93025;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}

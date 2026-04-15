@@ -18,38 +18,53 @@
           placeholder="Digite o nome do medicamento"
           required
           [(ngModel)]="medicamento.nome"
+          #nome="ngModel"
         />
+
+        @if (nome.invalid && nome.touched) {
+          <small class="erro">Nome é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
-        <label>Data de validade *</label>
-        <input type="date" name="dataValidade" required [(ngModel)]="medicamento.dataValidade" />
-      </div>
-
-      <div class="campo">
-        <label>Quantidade (unidade) *</label>
-        <input
-          type="number"
-          id="quantidade"
-          name="quantidade"
-          [(ngModel)]="medicamento.quantidade"
-          min="1"
-          step="1"
-          required
-        />
-      </div>
-
-      <div class="campo">
-        <label>Origem *</label>
-        <select name="origem" required [(ngModel)]="medicamento.origem">
+        <label>Categoria *</label>
+        <select name="origem" required [(ngModel)]="medicamento.categoria" #categoria="ngModel">
           <option value="">Selecione</option>
-          <option value="Prefeitura">Prefeitura</option>
-          <option value="Farmácia Popular">Farmácia Popular</option>
+          <option value="Analgésico">Analgésico</option>
+          <option value="Anti-inflamatório">Anti-inflamatório</option>
+          <option value="Antibiótico">Antibiótico</option>
+          <option value="Antialérgico">Antialérgico</option>
+          <option value="Vitamina/Suplemento">Vitamina/Suplemento</option>
+          <option value="Antidepressivo/Ansiolítico">Antidepressivo/Ansiolítico</option>
+          <option value="Outro">Outro</option>
         </select>
+
+        @if (categoria.invalid && categoria.touched) {
+          <small class="erro">Categoria é obrigatória</small>
+        }
+      </div>
+
+      <div class="campo">
+        <label>Unidade de medida *</label>
+        <select name="origem" required [(ngModel)]="medicamento.unidadeMedida" #unidade="ngModel">
+          <option value="">Selecione</option>
+          <option value="Comprimido">Comprimido</option>
+          <option value="Cápsula">Cápsula</option>
+          <option value="Ampola">Ampola</option>
+          <option value="Frasco">Frasco</option>
+          <option value="Sachê">Sachê</option>
+          <option value="Pomada/Creme">Pomada/Creme</option>
+          <option value="Ml">Ml</option>
+          <option value="Mg">Mg</option>
+        </select>
+
+        @if (unidade.invalid && unidade.touched) {
+          <small class="erro">Unidade de medida é obrigatória</small>
+        }
       </div>
 
       <div class="form-buttons">
-        <button type="submit" class="btn">Salvar</button>
+        <button type="submit" class="btn" [disabled]="form.invalid">Salvar</button>
         <button type="reset" class="btn">Limpar</button>
         <a routerLink="/home" class="btn-voltar"><< Voltar</a>
       </div>

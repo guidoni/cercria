@@ -123,3 +123,10 @@ a {
   border-radius: 8px;
   padding: 8px;
 }
+
+.erro {
+  color: #d93025;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}

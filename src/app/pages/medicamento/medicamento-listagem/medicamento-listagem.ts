@@ -49,6 +49,9 @@ export class MedicamentoListagem implements OnInit {
         this.servico.remover(id).subscribe({
           next: () => {
             this.medicamentos.update((lista) => lista.filter((m) => m.id !== id));
+            this.medicamentosFiltro.update((lista) => lista.filter((m) => m.id !== id));
+            this.medicamentosFiltrados.update((lista) => lista.filter((m) => m.id !== id));
+
             this.toastr.success('Medicamento excluído com sucesso!');
           },
           error: (err) => {

@@ -18,7 +18,12 @@
           placeholder="Digite o nome completo"
           required
           [(ngModel)]="funcionario.nome"
+          #nome="ngModel"
         />
+
+        @if (nome.invalid && nome.touched) {
+          <small class="erro">Nome é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
@@ -29,7 +34,11 @@
           placeholder="(xx) xxxxx-xxxx"
           mask="(00) 00000-0000"
           [(ngModel)]="funcionario.telefone"
+          #telefone="ngModel"
         />
+        @if (telefone.invalid && telefone.touched) {
+          <small class="erro">Telefone é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
@@ -39,7 +48,12 @@
           name="dataNascimento"
           required
           [(ngModel)]="funcionario.dataNascimento"
+          #dataNascimento="ngModel"
         />
+
+        @if (dataNascimento.invalid && dataNascimento.touched) {
+          <small class="erro">Data de nascimento é obrigatória</small>
+        }
       </div>
 
       <div class="campo grande">
@@ -50,7 +64,12 @@
           placeholder="Digite o e-mail"
           required
           [(ngModel)]="funcionario.email"
+          #email="ngModel"
         />
+
+        @if (email.invalid && email.touched) {
+          <small class="erro">Email é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
@@ -61,7 +80,11 @@
           placeholder="Digite o CPF"
           mask="000.000.000-00"
           [(ngModel)]="funcionario.cpf"
+          #cpf="ngModel"
         />
+        @if (cpf.invalid && cpf.touched) {
+          <small class="erro">CPF é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
@@ -72,22 +95,48 @@
           placeholder="Digite o RG"
           required
           [(ngModel)]="funcionario.rg"
+          #rg="ngModel"
         />
+
+        @if (rg.invalid && rg.touched) {
+          <small class="erro">RG é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
         <label>Órgão Emissor *</label>
-        <input type="text" name="orgaoEmissor" required [(ngModel)]="funcionario.orgaoEmissor" />
+        <input
+          type="text"
+          name="orgaoEmissor"
+          required
+          [(ngModel)]="funcionario.orgaoEmissor"
+          #orgaoEmissor="ngModel"
+        />
+
+        @if (orgaoEmissor.invalid && orgaoEmissor.touched) {
+          <small class="erro">Órgão Emissor é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
         <label>UF *</label>
-        <input type="text" name="uf" maxlength="2" required [(ngModel)]="funcionario.uf" />
+        <input
+          type="text"
+          name="uf"
+          maxlength="2"
+          required
+          [(ngModel)]="funcionario.uf"
+          #uf="ngModel"
+        />
+
+        @if (uf.invalid && uf.touched) {
+          <small class="erro">UF é obrigatória</small>
+        }
       </div>
 
       <div class="campo">
         <label>Cargo *</label>
-        <select name="cargo" required [(ngModel)]="funcionario.cargo">
+        <select name="cargo" required [(ngModel)]="funcionario.cargo" #cargo="ngModel">
           <option value="">Selecione</option>
           <option value="Coordenador">Coordenador</option>
           <option value="Psicólogo(a)">Psicólogo(a)</option>
@@ -97,11 +146,20 @@
           <option value="Auxiliar de cozinha">Auxiliar de cozinha</option>
           <option value="Auxiliar de serviços gerais">Auxiliar de serviços gerais</option>
         </select>
+
+        @if (cargo.invalid && cargo.touched) {
+          <small class="erro">Cargo é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
         <label>Escolaridade *</label>
-        <select name="escolaridade" required [(ngModel)]="funcionario.escolaridade">
+        <select
+          name="escolaridade"
+          required
+          [(ngModel)]="funcionario.escolaridade"
+          #escolaridade="ngModel"
+        >
           <option value="">Selecione</option>
           <option value="Fundamental Incompleto">Fundamental - Incompleto</option>
           <option value="Fundamental Completo">Fundamental - Completo</option>
@@ -116,6 +174,10 @@
           <option value="Doutorado Incompleto">Doutorado - Incompleto</option>
           <option value="Doutorado Completo">Doutorado - Completo</option>
         </select>
+
+        @if (escolaridade.invalid && escolaridade.touched) {
+          <small class="erro">Escolaridade é obrigatória</small>
+        }
       </div>
 
       <div class="campo">
@@ -126,21 +188,40 @@
           placeholder="Ex: 40h semanais"
           required
           [(ngModel)]="funcionario.cargaHoraria"
+          #cargaHoraria="ngModel"
         />
+
+        @if (cargaHoraria.invalid && cargaHoraria.touched) {
+          <small class="erro">Carga Horária é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
         <label>Sexo *</label>
-        <select name="sexo" required [(ngModel)]="funcionario.sexo">
+        <select name="sexo" required [(ngModel)]="funcionario.sexo" #sexo="ngModel">
           <option value="">Selecione</option>
           <option value="Feminino">Feminino</option>
           <option value="Masculino">Masculino</option>
         </select>
+
+        @if (sexo.invalid && sexo.touched) {
+          <small class="erro">Sexo é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
         <label>Data de admissão *</label>
-        <input type="date" name="dataAdmissao" required [(ngModel)]="funcionario.dataAdmissao" />
+        <input
+          type="date"
+          name="dataAdmissao"
+          required
+          [(ngModel)]="funcionario.dataAdmissao"
+          #dataAdmissao="ngModel"
+        />
+
+        @if (dataAdmissao.invalid && dataAdmissao.touched) {
+          <small class="erro">Data de admissão é obrigatória</small>
+        }
       </div>
 
       <div class="campo">
@@ -150,24 +231,48 @@
 
       <div class="campo">
         <label>Senha *</label>
-        <input type="password" name="senha" required [(ngModel)]="funcionario.senha" />
+        <input
+          type="password"
+          name="senha"
+          required
+          [(ngModel)]="funcionario.senha"
+          #senha="ngModel"
+        />
+
+        @if (senha.invalid && senha.touched) {
+          <small class="erro">Mínimo 6 caracteres</small>
+        }
       </div>
 
       <div class="campo">
         <label>Confirmação de senha *</label>
-        <input type="password" name="confirmarSenha" required />
+        <input
+          type="password"
+          name="confirmarSenha"
+          required
+          [(ngModel)]="confirmarSenha"
+          #confirmarSenhaModel="ngModel"
+        />
+
+        @if (confirmarSenhaModel.invalid && confirmarSenhaModel.touched) {
+          <small class="erro">Confirme a senha</small>
+        }
       </div>
 
       <div class="campo">
         <label>Status *</label>
-        <select name="ativo" [(ngModel)]="funcionario.ativo">
+        <select name="ativo" [(ngModel)]="funcionario.ativo" #status="ngModel">
           <option [ngValue]="true">Ativo</option>
           <option [ngValue]="false">Inativo</option>
         </select>
+
+        @if (status.invalid && status.touched) {
+          <small class="erro">Status é obrigatório</small>
+        }
       </div>
 
       <div class="form-buttons">
-        <button type="submit" class="btn">Salvar</button>
+        <button type="submit" class="btn" [disabled]="form.invalid">Salvar</button>
         <button type="reset" class="btn">Limpar</button>
         <a routerLink="/home" class="btn-voltar"><< Voltar</a>
       </div>

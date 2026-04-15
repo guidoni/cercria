@@ -14,6 +14,7 @@ import { AcolhidoEdicao } from './pages/acolhido/acolhido-edicao/acolhido-edicao
 import { ProdutoCadastro } from './pages/produto/produto-cadastro/produto-cadastro';
 import { ProdutoListagem } from './pages/produto/produto-listagem/produto-listagem';
 import { ProdutoEdicao } from './pages/produto/produto-edicao/produto-edicao';
+import { MedicamentoEstoque } from './pages/medicamento/medicamento-estoque/medicamento-estoque';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -32,6 +33,7 @@ export const routes: Routes = [
       { path: 'cadastro', component: MedicamentoCadastro },
       { path: 'listagem', component: MedicamentoListagem },
       { path: 'edicao/:id', component: MedicamentoEdicao },
+      { path: 'estoque/:id', component: MedicamentoEstoque },
     ],
   },
   {

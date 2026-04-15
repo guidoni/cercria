@@ -18,12 +18,17 @@
           placeholder="Digite o nome do produto"
           required
           [(ngModel)]="produto.nome"
+          #nome="ngModel"
         />
+
+        @if (nome.invalid && nome.touched) {
+          <small class="erro">Nome é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
         <label>Categoria *</label>
-        <select name="origem" required [(ngModel)]="produto.categoria">
+        <select name="origem" required [(ngModel)]="produto.categoria" #categoria="ngModel">
           <option value="">Selecione</option>
           <option value="Leguminosas">Leguminosas</option>
           <option value="Verduras">Verduras</option>
@@ -33,6 +38,10 @@
           <option value="Produtos de limpeza">Produtos de limpeza</option>
           <option value="Produtos de higiene pessoal">Produtos de higiene pessoal</option>
         </select>
+
+        @if (categoria.invalid && categoria.touched) {
+          <small class="erro">Categoria é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
@@ -51,7 +60,7 @@
 
       <div class="campo">
         <label>Unidade de medida *</label>
-        <select name="origem" required [(ngModel)]="produto.unidadeMedida">
+        <select name="origem" required [(ngModel)]="produto.unidadeMedida" #unidadeMedida="ngModel">
           <option value="">Selecione</option>
           <option value="Quilograma">Quilograma (Kg)</option>
           <option value="Grama">Gramas (g)</option>
@@ -60,10 +69,14 @@
           <option value="Unidade">Unidade (Un)</option>
           <option value="Caixa">Caixa (Cx)</option>
         </select>
+
+        @if (unidadeMedida.invalid && unidadeMedida.touched) {
+          <small class="erro">Unidade de medida é obrigatória</small>
+        }
       </div>
 
       <div class="form-buttons">
-        <button type="submit" class="btn">Salvar</button>
+        <button type="submit" class="btn" [disabled]="form.invalid">Salvar</button>
         <button type="reset" class="btn">Limpar</button>
         <a routerLink="/home" class="btn-voltar"><< Voltar</a>
       </div>

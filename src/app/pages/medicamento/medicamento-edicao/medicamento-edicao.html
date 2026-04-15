@@ -22,29 +22,31 @@
       </div>
 
       <div class="campo">
-        <label>Data de validade *</label>
-        <input type="date" name="dataValidade" required [(ngModel)]="medicamento.dataValidade" />
-      </div>
-
-      <div class="campo">
-        <label>Quantidade (unidade) *</label>
-        <input
-          type="number"
-          id="quantidade"
-          name="quantidade"
-          [(ngModel)]="medicamento.quantidade"
-          min="1"
-          step="1"
-          required
-        />
-      </div>
-
-      <div class="campo">
-        <label>Origem *</label>
-        <select name="origem" required [(ngModel)]="medicamento.origem">
+        <label>Categoria *</label>
+        <select name="categoria" required [(ngModel)]="medicamento.categoria">
           <option value="">Selecione</option>
-          <option value="Prefeitura">Prefeitura</option>
-          <option value="Farmácia Popular">Farmácia Popular</option>
+          <option value="Analgésico">Analgésico</option>
+          <option value="Anti-inflamatório">Anti-inflamatório</option>
+          <option value="Antibiótico">Antibiótico</option>
+          <option value="Antialérgico">Antialérgico</option>
+          <option value="Vitamina/Suplemento">Vitamina/Suplemento</option>
+          <option value="Antidepressivo/Ansiolítico">Antidepressivo/Ansiolítico</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Unidade de medida *</label>
+        <select name="unidadeMedida" required [(ngModel)]="medicamento.unidadeMedida">
+          <option value="">Selecione</option>
+          <option value="Comprimido">Comprimido</option>
+          <option value="Cápsula">Cápsula</option>
+          <option value="Ampola">Ampola</option>
+          <option value="Frasco">Frasco</option>
+          <option value="Sachê">Sachê</option>
+          <option value="Pomada/Creme">Pomada/Creme</option>
+          <option value="Ml">Ml</option>
+          <option value="Mg">Mg</option>
         </select>
       </div>
 

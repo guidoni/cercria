@@ -1,6 +1,6 @@
 .main-container {
   display: flex;
-  align-items: flex-start;
+  flex: 1;
 }
 
 .form-list-panel {
@@ -32,7 +32,28 @@ h2 {
   margin-top: 8px;
 }
 
-.btn {
+.btn,
+.btn-editar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 18px;
+  background-color: var(--cor-secundaria);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s,
+    transform 0.1s;
+  box-shadow: 0 4px 12px rgba(30, 59, 138, 0.25);
+  border: none;
+}
+
+.btnEstoque {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -133,7 +154,7 @@ td:last-child {
 }
 
 .buttons .btn:first-child {
-  background: #eef1ff;
+  background: #eef1ff !important;
   color: var(--cor-secundaria);
   box-shadow: none;
 }
@@ -230,6 +251,17 @@ td:last-child {
 }
 
 .filtros-linha button:hover {
+  background: var(--cor-secundaria);
+  color: white;
+}
+
+.btn-editar {
+  background: #eef1ff;
+  color: var(--cor-secundaria);
+  box-shadow: none;
+}
+
+.btn-editar:hover {
   background: var(--cor-secundaria);
   color: white;
 }

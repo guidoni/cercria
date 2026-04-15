@@ -24,6 +24,10 @@ export class FuncionarioCadastro {
     private router: Router,
   ) {}
 
+  ngOnInit() {
+    this.confirmarSenha = '';
+  }
+
   //Objeto do tipo funcionário
   funcionario = new Funcionario();
 
@@ -37,6 +41,11 @@ export class FuncionarioCadastro {
       this.funcionario = new Funcionario();
       form.reset();
       this.confirmarSenha = '';
+
+      if (this.funcionario.senha !== this.confirmarSenha) {
+        this.toastr.error('As senhas não coincidem!');
+        return;
+      }
 
       this.toastr.success('Funcionário cadastrado com sucesso!');
       this.router.navigate(['/funcionario/listagem']);
