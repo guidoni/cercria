@@ -1,0 +1,208 @@
+.main-container {
+  display: flex;
+  flex: 1;
+}
+
+.form-list-panel {
+  background-color: white;
+  width: 95%;
+  min-height: 60vh;
+  margin: 50px;
+  box-shadow: 0 4px 24px rgba(30, 59, 138, 0.1);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.calendario-container {
+  padding: 24px;
+  margin: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.calendario-titulo {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--cor-secundaria);
+  margin-bottom: 16px;
+}
+
+.calendario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.btn-novo-evento {
+  background-color: var(--cor-principal);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.1s ease;
+}
+
+.btn-novo-evento:hover {
+  background-color: var(--cor-terciaria);
+  transform: translateY(-1px);
+}
+
+.fc {
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.fc .fc-toolbar {
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--cor-secundaria);
+}
+
+.fc .fc-button {
+  background-color: var(--cor-principal);
+  border: none;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 6px 12px;
+  text-transform: capitalize;
+  transition: background-color 0.3s ease;
+}
+
+.fc .fc-button:hover {
+  background-color: var(--cor-terciaria);
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: var(--cor-secundaria);
+}
+
+.fc .fc-day-today {
+  background-color: rgba(30, 59, 138, 0.1) !important;
+}
+
+.fc .fc-col-header-cell {
+  background-color: var(--cor-principal);
+  color: #ffffff;
+  padding: 8px 0;
+  font-weight: 500;
+}
+
+.fc .fc-daygrid-day-number {
+  color: var(--cor-texto);
+  font-weight: 500;
+}
+
+.fc-event {
+  border: none;
+  border-radius: 6px;
+  padding: 2px 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.fc-event:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border-color: #e5e7eb;
+}
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup-card {
+  background: #fff;
+  border-radius: 10px;
+  width: 420px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.popup-header {
+  background: var(--cor-principal);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 20px;
+  position: relative;
+}
+
+.popup-header h3 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.popup-fechar {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.popup-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 0.95rem;
+}
+
+.popup-body p {
+  margin: 0;
+}
+
+.popup-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 20px;
+  border-top: 1px solid #eee;
+}
+
+.btn-editar {
+  background: #2f4b8f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-fechar {
+  background: #ddd;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}

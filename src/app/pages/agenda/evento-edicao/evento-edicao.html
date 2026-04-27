@@ -1,0 +1,152 @@
+<app-header></app-header>
+
+<div class="main-container">
+  <app-sidebar></app-sidebar>
+  <div class="form-list-panel">
+    <h2 class="titulo">Cadastro de Evento</h2>
+
+    <form #form="ngForm" (ngSubmit)="editar()">
+      <!-- Nome -->
+      <div class="form-group">
+        <label>Nome do Evento *</label>
+        <input
+          type="text"
+          name="nome"
+          [(ngModel)]="evento.nome"
+          required
+          class="form-control"
+          minlength="3"
+          #nome="ngModel"
+        />
+        @if (nome.touched) {
+          @if (nome.errors?.['required']) {
+            <small class="erro">Nome é obrigatório</small>
+          } @else if (nome.errors?.['minlength']) {
+            <small class="erro">Mínimo de 3 caracteres</small>
+          }
+        }
+      </div>
+
+      <!-- Data e Hora -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>Data *</label>
+          <input
+            type="date"
+            name="data"
+            [(ngModel)]="evento.data"
+            required
+            class="form-control"
+            #data="ngModel"
+          />
+          @if (data.invalid && data.touched) {
+            <small class="erro">Data é obrigatória</small>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>Hora *</label>
+          <input
+            type="time"
+            name="hora"
+            [(ngModel)]="evento.hora"
+            required
+            class="form-control"
+            #hora="ngModel"
+          />
+          @if (hora.invalid && hora.touched) {
+            <small class="erro">Hora é obrigatória</small>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Responsáveis *</label>
+
+        <input
+          type="text"
+          placeholder="Buscar responsável..."
+          [(ngModel)]="filtroResponsavel"
+          name="filtroResponsavel"
+          class="form-control"
+          #responsavel="ngModel"
+        />
+
+        <div class="lista-responsaveis">
+          @for (r of filtrarResponsaveis(); track r.id) {
+            <div class="responsavel-item">
+              <input
+                type="checkbox"
+                [checked]="isResponsavelSelecionado(r.id!)"
+                (change)="toggleResponsavel(r.id!)"
+              />
+              {{ r.nome }}
+            </div>
+          }
+        </div>
+      </div>
+
+      @if (responsavel.invalid && responsavel.touched) {
+        <small class="erro">Responsável é obrigatório</small>
+      }
+
+      <!-- Descrição -->
+      <div class="form-group">
+        <label>Descrição *</label>
+        <textarea
+          name="descricao"
+          [(ngModel)]="evento.descricao"
+          required
+          rows="4"
+          class="form-control"
+          minlength="3"
+          #desc="ngModel"
+        ></textarea>
+        @if (desc.touched) {
+          @if (desc.errors?.['required']) {
+            <small class="erro">Nome é obrigatório</small>
+          } @else if (desc.errors?.['minlength']) {
+            <small class="erro">Mínimo de 3 caracteres</small>
+          }
+        }
+      </div>
+
+      <!-- Acolhidos -->
+      <div class="form-group">
+        <label>Acolhidos Participantes</label>
+        <input
+          type="text"
+          placeholder="Buscar acolhido..."
+          [(ngModel)]="filtroAcolhido"
+          name="filtroAcolhido"
+          class="form-control"
+        />
+
+        <div class="lista-acolhidos">
+          @for (a of filtrarAcolhidos(); track a.id) {
+            <div class="acolhido-item">
+              <input
+                type="checkbox"
+                [checked]="isAcolhidoSelecionado(a.id)"
+                (change)="toggleAcolhido(a.id)"
+              />
+              {{ a.nome }}
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Botões -->
+      <div class="botoes">
+        <button type="button" class="btn-voltar" [routerLink]="['/agenda/listagem']">
+          << Voltar
+        </button>
+
+        <div class="botoes-direita">
+          <button type="reset" class="btn-limpar">Limpar</button>
+          <button type="submit" class="btn-salvar" [disabled]="form.invalid">Alterar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

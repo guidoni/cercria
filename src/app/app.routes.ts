@@ -15,6 +15,9 @@ import { ProdutoCadastro } from './pages/produto/produto-cadastro/produto-cadast
 import { ProdutoListagem } from './pages/produto/produto-listagem/produto-listagem';
 import { ProdutoEdicao } from './pages/produto/produto-edicao/produto-edicao';
 import { MedicamentoEstoque } from './pages/medicamento/medicamento-estoque/medicamento-estoque';
+import { EventoCadastro } from './pages/agenda/evento-cadastro/evento-cadastro';
+import { EdicaoEvento } from './pages/agenda/evento-edicao/evento-edicao';
+import { EventoListagem } from './pages/agenda/evento-listagem/evento-listagem';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -50,6 +53,14 @@ export const routes: Routes = [
       { path: 'cadastro', component: ProdutoCadastro },
       { path: 'listagem', component: ProdutoListagem },
       { path: 'edicao/:id', component: ProdutoEdicao },
+    ],
+  },
+  {
+    path: 'agenda',
+    children: [
+      { path: 'listagem', component: EventoListagem },
+      { path: 'evento-edicao/:id', component: EdicaoEvento },
+      { path: 'evento-cadastro', component: EventoCadastro },
     ],
   },
   { path: 'login', component: Login },

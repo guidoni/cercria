@@ -39,3 +39,22 @@ li {
 .btn-menu:active {
   background: rgba(255, 255, 255, 0.25);
 }
+
+.btn-logout {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: white;
+  margin-left: 10px;
+  transition: 0.2s;
+}
+
+.btn-logout:hover {
+  color: #ff4d4d;
+}
+
+.usuario-texto {
+  color: white;
+  font-weight: 500;
+}

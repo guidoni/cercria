@@ -16,13 +16,18 @@
           type="text"
           name="nome"
           placeholder="Digite o nome completo"
+          minlength="3"
           required
           [(ngModel)]="funcionario.nome"
           #nome="ngModel"
         />
 
-        @if (nome.invalid && nome.touched) {
-          <small class="erro">Nome é obrigatório</small>
+        @if (nome.touched) {
+          @if (nome.errors?.['required']) {
+            <small class="erro">Nome é obrigatório</small>
+          } @else if (nome.errors?.['minlength']) {
+            <small class="erro">Mínimo de 3 caracteres</small>
+          }
         }
       </div>
 
@@ -62,13 +67,18 @@
           type="email"
           name="email"
           placeholder="Digite o e-mail"
+          minlength="3"
           required
           [(ngModel)]="funcionario.email"
           #email="ngModel"
         />
 
-        @if (email.invalid && email.touched) {
-          <small class="erro">Email é obrigatório</small>
+        @if (email.touched) {
+          @if (email.errors?.['required']) {
+            <small class="erro">Nome é obrigatório</small>
+          } @else if (email.errors?.['minlength']) {
+            <small class="erro">Mínimo de 3 caracteres</small>
+          }
         }
       </div>
 
@@ -185,7 +195,7 @@
         <input
           type="text"
           name="cargaHoraria"
-          placeholder="Ex: 40h semanais"
+          placeholder="Apenas números"
           required
           [(ngModel)]="funcionario.cargaHoraria"
           #cargaHoraria="ngModel"
@@ -256,18 +266,6 @@
 
         @if (confirmarSenhaModel.invalid && confirmarSenhaModel.touched) {
           <small class="erro">Confirme a senha</small>
-        }
-      </div>
-
-      <div class="campo">
-        <label>Status *</label>
-        <select name="ativo" [(ngModel)]="funcionario.ativo" #status="ngModel">
-          <option [ngValue]="true">Ativo</option>
-          <option [ngValue]="false">Inativo</option>
-        </select>
-
-        @if (status.invalid && status.touched) {
-          <small class="erro">Status é obrigatório</small>
         }
       </div>
 

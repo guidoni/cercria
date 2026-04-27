@@ -12,4 +12,10 @@ import { SidebarService } from '../../services/sidebar/sidebar.service';
 })
 export class Sidebar {
   sidebarService = inject(SidebarService);
+
+  menuAberto: string | null = null;
+
+  toggleMenu(menu: string) {
+    this.menuAberto = this.menuAberto === menu ? null : menu;
+  }
 }

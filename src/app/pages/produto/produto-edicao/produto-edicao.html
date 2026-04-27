@@ -16,9 +16,19 @@
           type="text"
           name="nome"
           placeholder="Digite o nome do produto"
+          minlength="3"
           required
           [(ngModel)]="produto.nome"
+          #nome="ngModel"
         />
+
+        @if (nome.touched) {
+          @if (nome.errors?.['required']) {
+            <small class="erro">Nome é obrigatório</small>
+          } @else if (nome.errors?.['minlength']) {
+            <small class="erro">Mínimo de 3 caracteres</small>
+          }
+        }
       </div>
 
       <div class="campo">

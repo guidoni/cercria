@@ -28,6 +28,7 @@ export class FuncionarioEdicao implements OnInit {
   //Método de edição
   editar(): void {
     this.servico.editar(this.funcionario).subscribe(() => {
+      this.funcionario.ativo = !this.funcionario.dataSaida;
       this.toastr.success('Funcionário editado com sucesso!');
     });
   }

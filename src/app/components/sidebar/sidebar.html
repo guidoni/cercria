@@ -1,30 +1,75 @@
 <div class="sidebar" [class.aberta]="sidebarService.aberta()">
-  <div class="menu-item" routerLinkActive="ativo" routerLink="/home">
+  <!-- INÍCIO -->
+  <div class="menu-item" routerLink="/home" routerLinkActive="ativo">
     <img src="/assets/casa_navbar.png" />
     <span>Início</span>
   </div>
-  <div class="menu-item" routerLinkActive="ativo" routerLink="/funcionario/cadastro">
+
+  <!-- FUNCIONÁRIOS -->
+  <div class="menu-item" (click)="toggleMenu('funcionario')">
     <img src="/assets/user.png" />
     <span>Funcionários</span>
+    <span class="seta" [class.aberta]="menuAberto === 'funcionario'">▼</span>
   </div>
-  <div class="menu-item" routerLinkActive="ativo" routerLink="/acolhido/cadastro">
+
+  <div class="submenu" [class.aberto]="menuAberto === 'funcionario'">
+    <div routerLink="/funcionario/cadastro" routerLinkActive="ativo" class="submenu-item">
+      Cadastro
+    </div>
+    <div routerLink="/funcionario/listagem" routerLinkActive="ativo" class="submenu-item">
+      Listagem
+    </div>
+  </div>
+
+  <!-- ACOLHIDOS -->
+  <div class="menu-item" (click)="toggleMenu('acolhido')">
     <img src="/assets/acolhidos_icone.png" />
     <span>Acolhidos</span>
+    <span class="seta" [class.aberta]="menuAberto === 'acolhido'">▼</span>
   </div>
-  <div class="menu-item" routerLinkActive="ativo" routerLink="/medicamento/cadastro">
+
+  <div class="submenu" [class.aberto]="menuAberto === 'acolhido'">
+    <div routerLink="/acolhido/cadastro" routerLinkActive="ativo" class="submenu-item">
+      Cadastro
+    </div>
+    <div routerLink="/acolhido/listagem" routerLinkActive="ativo" class="submenu-item">
+      Listagem
+    </div>
+  </div>
+
+  <!-- MEDICAMENTOS -->
+  <div class="menu-item" (click)="toggleMenu('medicamento')">
     <img src="/assets/remedios_icone.png" />
     <span>Medicamentos</span>
+    <span class="seta" [class.aberta]="menuAberto === 'medicamento'">▼</span>
   </div>
-  <div class="menu-item" routerLinkActive="ativo" routerLink="/produto/cadastro">
+
+  <div class="submenu" [class.aberto]="menuAberto === 'medicamento'">
+    <div routerLink="/medicamento/cadastro" class="submenu-item">Cadastro</div>
+    <div routerLink="/medicamento/listagem" class="submenu-item">Listagem</div>
+  </div>
+
+  <!-- ESTOQUE -->
+  <div class="menu-item" (click)="toggleMenu('produto')">
     <img src="/assets/estoque_icone.png" />
     <span>Estoque</span>
+    <span class="seta" [class.aberta]="menuAberto === 'produto'">▼</span>
   </div>
-  <div class="menu-item" routerLinkActive="ativo">
+
+  <div class="submenu" [class.aberto]="menuAberto === 'produto'">
+    <div routerLink="/produto/cadastro" class="submenu-item">Cadastro</div>
+    <div routerLink="/produto/listagem" class="submenu-item">Listagem</div>
+  </div>
+
+  <!-- AGENDA -->
+  <div class="menu-item" (click)="toggleMenu('agenda')">
     <img src="/assets/calendario_icone.png" />
     <span>Agenda</span>
+    <span class="seta" [class.aberta]="menuAberto === 'agenda'">▼</span>
   </div>
-  <div class="menu-item" routerLinkActive="ativo">
-    <img src="/assets/relatorio_icone.png" />
-    <span>Relatórios</span>
+
+  <div class="submenu" [class.aberto]="menuAberto === 'agenda'">
+    <div routerLink="/agenda/listagem" class="submenu-item">Calendário</div>
+    <div routerLink="/agenda/evento-cadastro" class="submenu-item">Novo Evento</div>
   </div>
 </div>

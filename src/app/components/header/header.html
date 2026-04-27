@@ -17,10 +17,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <!-- colocar o símbolo de sair, não agora-->
+        <li class="nav-item d-flex align-items-center gap-2">
           <img src="assets/user.png" />
-          <a class="nav-link active" aria-current="page" routerLink="/login">Olá, {{ usuario }}!</a>
+
+          <span class="usuario-texto"> Olá, {{ usuario }}! </span>
+
+          <!-- botão logout -->
+          <button class="btn-logout" (click)="logout()" title="Sair">X</button>
         </li>
       </ul>
     </div>

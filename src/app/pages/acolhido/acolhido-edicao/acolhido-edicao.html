@@ -16,9 +16,19 @@
           type="text"
           name="nome"
           placeholder="Digite o nome completo"
+          minlength="3"
           required
           [(ngModel)]="acolhido.nome"
+          #nome="ngModel"
         />
+
+        @if (nome.touched) {
+          @if (nome.errors?.['required']) {
+            <small class="erro">Nome é obrigatório</small>
+          } @else if (nome.errors?.['minlength']) {
+            <small class="erro">Mínimo de 3 caracteres</small>
+          }
+        }
       </div>
 
       <div class="campo">
@@ -29,12 +39,27 @@
           mask="000.000.000-00"
           placeholder="Digite o CPF"
           [(ngModel)]="acolhido.cpf"
+          #cpf="ngModel"
         />
+
+        @if (cpf.invalid && cpf.touched) {
+          <small class="erro">CPF é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
         <label>Data de nascimento *</label>
-        <input type="date" name="dataNascimento" required [(ngModel)]="acolhido.dataNascimento" />
+        <input
+          type="date"
+          name="dataNascimento"
+          required
+          [(ngModel)]="acolhido.dataNascimento"
+          #dataNascimento="ngModel"
+        />
+
+        @if (dataNascimento.invalid && dataNascimento.touched) {
+          <small class="erro">Data de nascimento é obrigatório</small>
+        }
       </div>
 
       <div class="campo grande">
@@ -44,8 +69,18 @@
           name="escola"
           placeholder="Digite a escola"
           required
+          minlength="3"
           [(ngModel)]="acolhido.escola"
+          #escola="ngModel"
         />
+
+        @if (escola.touched) {
+          @if (escola.errors?.['required']) {
+            <small class="erro">Nome é obrigatório</small>
+          } @else if (escola.errors?.['minlength']) {
+            <small class="erro">Mínimo de 3 caracteres</small>
+          }
+        }
       </div>
 
       <div class="campo grande">
@@ -55,17 +90,34 @@
           name="localFamiliar"
           placeholder="Digite o local familiar"
           [(ngModel)]="acolhido.localFamiliar"
+          minlength="3"
+          #localFam="ngModel"
         />
+        @if (localFam.errors?.['minlength']) {
+          <small class="erro">Mínimo de 3 caracteres</small>
+        }
       </div>
 
       <div class="campo">
         <label>Número do Processo</label>
-        <input type="text" name="numeroProcesso" [(ngModel)]="acolhido.numeroProcesso" />
+        <input
+          type="text"
+          name="numeroProcesso"
+          [(ngModel)]="acolhido.numeroProcesso"
+          minlength="3"
+          #numProc="ngModel"
+        />
+        @if (numProc.errors?.['minlength']) {
+          <small class="erro">Mínimo de 3 caracteres</small>
+        }
       </div>
 
       <div class="campo">
         <label>Vara</label>
-        <input type="text" name="vara" [(ngModel)]="acolhido.vara" />
+        <input type="text" name="vara" [(ngModel)]="acolhido.vara" minlength="3" #vara="ngModel" />
+        @if (vara.errors?.['minlength']) {
+          <small class="erro">Mínimo de 3 caracteres</small>
+        }
       </div>
 
       <div class="campo">
@@ -75,7 +127,7 @@
 
       <div class="campo">
         <label>Cor da pele *</label>
-        <select name="corPele" required [(ngModel)]="acolhido.corPele">
+        <select name="corPele" required [(ngModel)]="acolhido.corPele" #corPele="ngModel">
           <option value="">Selecione</option>
           <option value="Branca">Branca</option>
           <option value="Parda">Parda</option>
@@ -97,12 +149,25 @@
           name="deficiencia"
           placeholder="Digite se houver"
           [(ngModel)]="acolhido.deficiencia"
+          #deficiencia="ngModel"
         />
+        @if (deficiencia.errors?.['minlength']) {
+          <small class="erro">Mínimo de 3 caracteres</small>
+        }
       </div>
 
       <div class="campo">
         <label>PPCAAM</label>
-        <input type="text" name="ppcaam" [(ngModel)]="acolhido.ppcaam" />
+        <input
+          type="text"
+          name="ppcaam"
+          minlength="3"
+          [(ngModel)]="acolhido.ppcaam"
+          #ppcaam="ngModel"
+        />
+        @if (ppcaam.errors?.['minlength']) {
+          <small class="erro">Mínimo de 3 caracteres</small>
+        }
       </div>
 
       <div class="campo grande">
@@ -124,7 +189,12 @@
 
       <div class="campo">
         <label>Tamanho Camiseta *</label>
-        <select name="tamanhoCamiseta" required [(ngModel)]="acolhido.tamanhoCamiseta">
+        <select
+          name="tamanhoCamiseta"
+          required
+          [(ngModel)]="acolhido.tamanhoCamiseta"
+          #tamanho="ngModel"
+        >
           <option value="">Selecione</option>
           <option value="PP">PP</option>
           <option value="P">P</option>
@@ -133,6 +203,10 @@
           <option value="GG">GG</option>
           <option value="XG">XG</option>
         </select>
+
+        @if (tamanho.invalid && tamanho.touched) {
+          <small class="erro">Tamanho é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
@@ -142,10 +216,14 @@
           name="tamanhoBermudaCalca"
           min="10"
           max="60"
-          step="2"
           required
           [(ngModel)]="acolhido.tamanhoBermudaCalca"
+          #tamanho="ngModel"
         />
+
+        @if (tamanho.invalid && tamanho.touched) {
+          <small class="erro">Tamanho é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
@@ -157,12 +235,22 @@
           max="45"
           required
           [(ngModel)]="acolhido.tamanhoCalcado"
+          #tamanho="ngModel"
         />
+
+        @if (tamanho.invalid && tamanho.touched) {
+          <small class="erro">Tamanho é obrigatório</small>
+        }
       </div>
 
       <div class="campo">
         <label>Tamanho Roupa Íntima *</label>
-        <select name="tamanhoRoupaIntima" required [(ngModel)]="acolhido.tamanhoRoupaIntima">
+        <select
+          name="tamanhoRoupaIntima"
+          required
+          [(ngModel)]="acolhido.tamanhoRoupaIntima"
+          #tamanho="ngModel"
+        >
           <option value="">Selecione</option>
           <option value="PP">PP</option>
           <option value="P">P</option>
@@ -171,18 +259,14 @@
           <option value="GG">GG</option>
           <option value="XG">XG</option>
         </select>
-      </div>
 
-      <div class="campo">
-        <label>Status *</label>
-        <select name="ativo" [(ngModel)]="acolhido.ativo">
-          <option [ngValue]="true">Ativo</option>
-          <option [ngValue]="false">Inativo</option>
-        </select>
+        @if (tamanho.invalid && tamanho.touched) {
+          <small class="erro">Tamanho é obrigatório</small>
+        }
       </div>
 
       <div class="form-buttons">
-        <button type="submit" class="btn">Alterar</button>
+        <button type="submit" class="btn" [disabled]="form.invalid">Alterar</button>
         <a routerLink="/acolhido/listagem" class="btn-voltar"><< Voltar</a>
       </div>
     </form>

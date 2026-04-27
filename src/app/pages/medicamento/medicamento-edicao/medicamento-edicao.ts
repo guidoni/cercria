@@ -27,7 +27,7 @@ export class MedicamentoEdicao {
   //Método de edição
   editar(): void {
     this.servico.editar(this.medicamento).subscribe(() => {
-      this.toastr.success('Produto editado com sucesso!');
+      this.toastr.success('Medicamento editado com sucesso!');
     });
   }
 

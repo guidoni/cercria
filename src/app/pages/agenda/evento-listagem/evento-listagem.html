@@ -1,0 +1,72 @@
+<app-header></app-header>
+
+<div class="main-container">
+  <app-sidebar></app-sidebar>
+
+  <div class="calendario-container">
+    <div class="calendario-header">
+      <h2 class="calendario-titulo">Calendário de Eventos</h2>
+      <button class="btn-novo-evento" routerLink="/agenda/evento-cadastro">Novo Evento</button>
+    </div>
+
+    <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+  </div>
+</div>
+
+<!-- Popup -->
+@if (mostrarPopup && eventoSelecionado) {
+  <div class="popup-overlay" (click)="fecharPopup()">
+    <div class="popup-card" (click)="$event.stopPropagation()">
+      <div class="popup-header">
+        <h3>{{ eventoSelecionado.nome || 'Evento' }}</h3>
+      </div>
+
+      <div class="popup-body">
+        <p>
+          <strong>Data:</strong>
+          {{ eventoSelecionado.data | date: 'dd/MM/yyyy' }}
+        </p>
+
+        <p>
+          <strong>Hora:</strong>
+          {{ eventoSelecionado.hora.substring(0, 5) }}
+        </p>
+
+        <p>
+          <strong>Status:</strong>
+          {{ getStatusEvento(eventoSelecionado.data, eventoSelecionado.hora) }}
+        </p>
+
+        <p>
+          <strong>Responsáveis:</strong>
+          @if (eventoSelecionado.responsaveis.length > 0) {
+            {{ eventoSelecionado.responsaveis.map(id => getNomeResponsavel(id)).join(', ') }}
+          } @else {
+            Nenhum responsável
+          }
+        </p>
+
+        <p>
+          <strong>Acolhidos:</strong>
+          @if (eventoSelecionado.acolhidos.length > 0) {
+            {{ eventoSelecionado.acolhidos.map(id => getNomeAcolhido(id)).join(', ') }}
+          } @else {
+            Atividade sem acolhidos
+          }
+        </p>
+
+        <p>
+          <strong>Descrição:</strong>
+          {{ eventoSelecionado.descricao }}
+        </p>
+      </div>
+
+      <div class="popup-footer">
+        <button class="btn-editar" [routerLink]="['/agenda/evento-edicao', eventoSelecionado.id]">
+          Editar
+        </button>
+        <button class="btn-fechar" (click)="fecharPopup()">Fechar</button>
+      </div>
+    </div>
+  </div>
+}

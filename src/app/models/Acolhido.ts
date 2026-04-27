@@ -1,5 +1,5 @@
 export class Acolhido {
-  id?: number;
+  id!: number;
 
   nome: string = '';
   cpf: string = '';

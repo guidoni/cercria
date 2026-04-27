@@ -74,11 +74,11 @@ export class FuncionarioListagem implements OnInit {
 
   filtrarFuncionarios() {
     if (this.filtroStatus === 'ativos') {
-      return this.funcionarios().filter((f) => f.ativo);
+      return this.funcionarios().filter((f) => !f.dataSaida);
     }
 
     if (this.filtroStatus === 'inativos') {
-      return this.funcionarios().filter((f) => !f.ativo);
+      return this.funcionarios().filter((f) => f.dataSaida);
     }
 
     return this.funcionarios();

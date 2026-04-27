@@ -11,12 +11,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withInMemoryScrolling({
-        scrollPositionRestoration: 'top'
-      })
+        scrollPositionRestoration: 'top',
+      }),
     ),
     provideNgxMask(),
     provideHttpClient(),
     provideAnimations(),
-    provideToastr()
-  ]
+    provideToastr(),
+  ],
 };

@@ -43,6 +43,8 @@ export class AcolhidoCadastro {
 
   //Método de cadastro
   cadastrar(form: any): void {
+    this.acolhido.ativo = !this.acolhido.dataSaida;
+
     this.servico.cadastrar(this.acolhido).subscribe((retorno) => {
       this.acolhidos.push(retorno);
 

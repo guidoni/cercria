@@ -1,16 +1,16 @@
 @import 'ngx-toastr/toastr';
 
 body {
-    background-color: var(--cor-fundo);
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
+  background-color: var(--cor-fundo);
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
 }
 
 :root {
-    --cor-principal: #1e3b8ae5;
-    --cor-secundaria: #1E3A8A;
-    --cor-terciaria: #163070;
-    --cor-fundo: #F3F4F6;
-    --cor-texto: #333;
-    --vermelho:  #e05252;
+  --cor-principal: #1e3b8ae5;
+  --cor-secundaria: #1e3a8a;
+  --cor-terciaria: #163070;
+  --cor-fundo: #f3f4f6;
+  --cor-texto: #333;
+  --vermelho: #e05252;
 }

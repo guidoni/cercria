@@ -35,8 +35,14 @@ export class AcolhidoEdicao implements OnInit {
   //Método de edição
   editar(): void {
     this.servico.editar(this.acolhido).subscribe(() => {
+      this.acolhido.ativo = !this.acolhido.dataSaida;
       this.toastr.success('Acolhido editado com sucesso!');
     });
+  }
+
+  formatarData(data?: string): string {
+    if (!data) return '';
+    return data.split('T')[0];
   }
 
   ngOnInit(): void {
@@ -54,6 +60,10 @@ export class AcolhidoEdicao implements OnInit {
         console.log('RETORNO:', retorno);
 
         this.acolhido = retorno;
+
+        this.acolhido.dataNascimento = this.formatarData(retorno.dataNascimento);
+        this.acolhido.dataEntrada = this.formatarData(retorno.dataEntrada);
+        this.acolhido.dataSaida = this.formatarData(retorno.dataSaida);
 
         if (!this.acolhido.medicamentos) {
           this.acolhido.medicamentos = [];

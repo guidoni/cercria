@@ -3,12 +3,12 @@
     <h2>Olá, faça seu login!</h2>
 
     <div class="form">
-      <form>
+      <form (ngSubmit)="entrar()">
         <label for="user">Usuário</label>
-        <input type="email" id="user" name="user">
+        <input type="email" id="user" name="email" [(ngModel)]="email" required />
 
         <label for="password">Senha</label>
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" name="senha" [(ngModel)]="senha" required />
 
         <button type="submit">Entrar</button>
       </form>

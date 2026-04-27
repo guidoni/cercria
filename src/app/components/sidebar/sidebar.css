@@ -1,10 +1,9 @@
+/* SIDEBAR BASE */
 .sidebar {
   background-color: var(--cor-principal);
   width: 70px;
   padding-top: 30px;
   padding-bottom: 30px;
-  box-sizing: border-box;
-  flex-shrink: 0;
   height: 100vh;
   overflow: hidden;
   transition: width 0.3s ease;
@@ -16,13 +15,14 @@
   width: 270px;
 }
 
+/* ITEM PRINCIPAL */
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 12px 0;
-  padding-left: 18px;
+  padding: 12px 18px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  position: relative;
 }
 
 .menu-item img {
@@ -32,9 +32,10 @@
   flex-shrink: 0;
 }
 
+/* TEXTO */
 .menu-item span {
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   white-space: nowrap;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -44,10 +45,70 @@
   opacity: 1;
 }
 
+/* HOVER */
 .menu-item:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
 
 .menu-item.ativo {
   background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* SETA */
+.seta {
+  margin-left: auto;
+  color: white;
+  font-size: 12px;
+  transition: transform 0.3s;
+  opacity: 0;
+}
+
+.sidebar.aberta .seta {
+  opacity: 1;
+}
+
+.seta.aberta {
+  transform: rotate(180deg);
+}
+
+/* SUBMENU */
+.submenu {
+  max-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-left: 65px;
+  transition: max-height 0.3s ease;
+}
+
+.submenu.aberto {
+  max-height: 300px;
+}
+
+/* ITEM SUBMENU */
+.submenu-item {
+  padding: 6px 0;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s;
+  transform: translateX(-10px);
+}
+
+.sidebar.aberta .submenu-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.submenu-item:hover {
+  color: #ddd;
+}
+
+/* ATIVO */
+.submenu-item.ativo {
+  font-weight: bold;
+  color: #fff;
 }

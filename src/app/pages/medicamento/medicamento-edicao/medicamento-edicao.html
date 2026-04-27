@@ -16,14 +16,24 @@
           type="text"
           name="nome"
           placeholder="Digite o nome do medicamento"
+          minlength="3"
           required
           [(ngModel)]="medicamento.nome"
+          #nome="ngModel"
         />
+
+        @if (nome.touched) {
+          @if (nome.errors?.['required']) {
+            <small class="erro">Nome é obrigatório</small>
+          } @else if (nome.errors?.['minlength']) {
+            <small class="erro">Mínimo de 3 caracteres</small>
+          }
+        }
       </div>
 
       <div class="campo">
         <label>Categoria *</label>
-        <select name="categoria" required [(ngModel)]="medicamento.categoria">
+        <select name="origem" required [(ngModel)]="medicamento.categoria" #categoria="ngModel">
           <option value="">Selecione</option>
           <option value="Analgésico">Analgésico</option>
           <option value="Anti-inflamatório">Anti-inflamatório</option>
@@ -33,11 +43,15 @@
           <option value="Antidepressivo/Ansiolítico">Antidepressivo/Ansiolítico</option>
           <option value="Outro">Outro</option>
         </select>
+
+        @if (categoria.invalid && categoria.touched) {
+          <small class="erro">Categoria é obrigatória</small>
+        }
       </div>
 
       <div class="campo">
         <label>Unidade de medida *</label>
-        <select name="unidadeMedida" required [(ngModel)]="medicamento.unidadeMedida">
+        <select name="origem" required [(ngModel)]="medicamento.unidadeMedida" #unidade="ngModel">
           <option value="">Selecione</option>
           <option value="Comprimido">Comprimido</option>
           <option value="Cápsula">Cápsula</option>
@@ -48,6 +62,10 @@
           <option value="Ml">Ml</option>
           <option value="Mg">Mg</option>
         </select>
+
+        @if (unidade.invalid && unidade.touched) {
+          <small class="erro">Unidade de medida é obrigatória</small>
+        }
       </div>
 
       <div class="form-buttons">

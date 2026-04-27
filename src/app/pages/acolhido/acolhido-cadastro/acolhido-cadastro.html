@@ -16,13 +16,18 @@
           type="text"
           name="nome"
           placeholder="Digite o nome completo"
+          minlength="3"
           required
           [(ngModel)]="acolhido.nome"
           #nome="ngModel"
         />
 
-        @if (nome.invalid && nome.touched) {
-          <small class="erro">Nome é obrigatório</small>
+        @if (nome.touched) {
+          @if (nome.errors?.['required']) {
+            <small class="erro">Nome é obrigatório</small>
+          } @else if (nome.errors?.['minlength']) {
+            <small class="erro">Mínimo de 3 caracteres</small>
+          }
         }
       </div>
 
@@ -64,12 +69,17 @@
           name="escola"
           placeholder="Digite a escola"
           required
+          minlength="3"
           [(ngModel)]="acolhido.escola"
           #escola="ngModel"
         />
 
-        @if (escola.invalid && escola.touched) {
-          <small class="erro">Escola é obrigatória</small>
+        @if (escola.touched) {
+          @if (escola.errors?.['required']) {
+            <small class="erro">Nome é obrigatório</small>
+          } @else if (escola.errors?.['minlength']) {
+            <small class="erro">Mínimo de 3 caracteres</small>
+          }
         }
       </div>
 
@@ -80,17 +90,34 @@
           name="localFamiliar"
           placeholder="Digite o local familiar"
           [(ngModel)]="acolhido.localFamiliar"
+          minlength="3"
+          #localFam="ngModel"
         />
+        @if (localFam.errors?.['minlength']) {
+          <small class="erro">Mínimo de 3 caracteres</small>
+        }
       </div>
 
       <div class="campo">
         <label>Número do Processo</label>
-        <input type="text" name="numeroProcesso" [(ngModel)]="acolhido.numeroProcesso" />
+        <input
+          type="text"
+          name="numeroProcesso"
+          [(ngModel)]="acolhido.numeroProcesso"
+          minlength="3"
+          #numProc="ngModel"
+        />
+        @if (numProc.errors?.['minlength']) {
+          <small class="erro">Mínimo de 3 caracteres</small>
+        }
       </div>
 
       <div class="campo">
         <label>Vara</label>
-        <input type="text" name="vara" [(ngModel)]="acolhido.vara" />
+        <input type="text" name="vara" [(ngModel)]="acolhido.vara" minlength="3" #vara="ngModel" />
+        @if (vara.errors?.['minlength']) {
+          <small class="erro">Mínimo de 3 caracteres</small>
+        }
       </div>
 
       <div class="campo">
@@ -122,12 +149,25 @@
           name="deficiencia"
           placeholder="Digite se houver"
           [(ngModel)]="acolhido.deficiencia"
+          #deficiencia="ngModel"
         />
+        @if (deficiencia.errors?.['minlength']) {
+          <small class="erro">Mínimo de 3 caracteres</small>
+        }
       </div>
 
       <div class="campo">
         <label>PPCAAM</label>
-        <input type="text" name="ppcaam" [(ngModel)]="acolhido.ppcaam" />
+        <input
+          type="text"
+          name="ppcaam"
+          minlength="3"
+          [(ngModel)]="acolhido.ppcaam"
+          #ppcaam="ngModel"
+        />
+        @if (ppcaam.errors?.['minlength']) {
+          <small class="erro">Mínimo de 3 caracteres</small>
+        }
       </div>
 
       <div class="campo grande">
@@ -222,18 +262,6 @@
 
         @if (tamanho.invalid && tamanho.touched) {
           <small class="erro">Tamanho é obrigatório</small>
-        }
-      </div>
-
-      <div class="campo">
-        <label>Status *</label>
-        <select name="ativo" [(ngModel)]="acolhido.ativo" #status="ngModel">
-          <option [ngValue]="true">Ativo</option>
-          <option [ngValue]="false">Inativo</option>
-        </select>
-
-        @if (status.invalid && status.touched) {
-          <small class="erro">Status é obrigatório</small>
         }
       </div>
 

@@ -35,17 +35,19 @@ export class FuncionarioCadastro {
 
   //Método de cadastro
   cadastrar(form: any): void {
+    if (this.funcionario.senha !== this.confirmarSenha) {
+      this.toastr.error('As senhas não coincidem!');
+      return;
+    }
+
+    this.funcionario.ativo = !this.funcionario.dataSaida;
+
     this.servico.cadastrar(this.funcionario).subscribe((retorno) => {
       this.funcionarios.push(retorno);
 
       this.funcionario = new Funcionario();
-      form.reset();
       this.confirmarSenha = '';
-
-      if (this.funcionario.senha !== this.confirmarSenha) {
-        this.toastr.error('As senhas não coincidem!');
-        return;
-      }
+      form.reset();
 
       this.toastr.success('Funcionário cadastrado com sucesso!');
       this.router.navigate(['/funcionario/listagem']);
