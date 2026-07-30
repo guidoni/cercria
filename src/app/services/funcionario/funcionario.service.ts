@@ -61,10 +61,9 @@ export class FuncionarioService {
     return this.http.get<Funcionario>(this.url + '/' + id);
   }
 
-  //Método de remover
-  remover(id: number): Observable<void> {
-    // Faz uma requisição GET passando o ID do funcionario diretamente na URL
-    return this.http.delete<void>(this.url + '/' + id);
+  // Método de remover (exclusão lógica)
+  remover(id: number): Observable<any> {
+    return this.http.put<any>(this.url + '/excluir/' + id, {});
   }
 
   //Método de alterar senha

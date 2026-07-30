@@ -1,6 +1,6 @@
 .main-container {
   display: flex;
-  align-items: flex-start;
+  flex: 1;
 }
 
 .form-list-panel {
@@ -186,6 +186,27 @@ td:last-child {
   transform: scale(0.97);
   background: white;
   color: var(--cor-secundaria);
+}
+
+.btn-excluir {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.btn-excluir:hover {
+  background-color: #bb2d3b;
+}
+
+.btn-excluir:active {
+  transform: scale(0.97);
 }
 
 .card-overlay {

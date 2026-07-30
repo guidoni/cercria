@@ -60,6 +60,7 @@
                     >Medicação</a
                   >
                   <a [routerLink]="['/acolhido/edicao', a.id]" class="btn"> Editar </a>
+                  <a class="btn-excluir" (click)="excluir(a.id)"> Excluir </a>
                 </div>
               </td>
             </tr>

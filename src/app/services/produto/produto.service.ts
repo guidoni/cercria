@@ -61,9 +61,8 @@ export class ProdutoService {
     return this.http.get<Produto>(this.url + '/' + id);
   }
 
-  // Método responsável por remover um produto pelo seu ID
-  remover(id: number): Observable<void> {
-    // Faz uma requisição DELETE passando o ID do produto diretamente na URL
-    return this.http.delete<void>(this.url + '/' + id);
+  // Método de remover (exclusão lógica)
+  remover(id: number): Observable<any> {
+    return this.http.put<any>(this.url + '/excluir/' + id, {});
   }
 }

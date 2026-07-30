@@ -8,6 +8,7 @@ import { NgxMaskPipe } from 'ngx-mask';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { AcolhidoService } from '../../../services/acolhido/acolhido.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-acolhido-listagem',
@@ -60,5 +61,35 @@ export class AcolhidoListagem {
     }
 
     return this.acolhidos();
+  }
+
+  //Método excluir
+  excluir(id: number): void {
+    Swal.fire({
+      title: 'Excluir acolhido?',
+      text: 'Essa ação não poderá ser revertida.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Excluir',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.servico.remover(id).subscribe({
+          next: () => {
+            this.servico.selecionar().subscribe({
+              next: (retorno) => this.acolhidos.set(retorno),
+            });
+
+            this.toastr.success('Acolhido excluído com sucesso!');
+          },
+          error: (err) => {
+            console.error(err);
+            this.toastr.error('Erro ao remover acolhido.');
+          },
+        });
+      }
+    });
   }
 }

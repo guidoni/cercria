@@ -57,13 +57,8 @@ export class PatrimonioService {
     );
   }
 
-  // Remover um patrimônio
-  remover(id: number): Observable<void> {
-    return this.http.delete<void>(this.url + '/' + id).pipe(
-      catchError((err) => {
-        console.error('Erro ao remover patrimônio', err);
-        return throwError(() => err);
-      }),
-    );
+  // Método de remover (exclusão lógica)
+  remover(id: number): Observable<any> {
+    return this.http.put<any>(this.url + '/excluir/' + id, {});
   }
 }

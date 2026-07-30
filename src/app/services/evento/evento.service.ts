@@ -59,12 +59,8 @@ export class EventoService {
   }
 
   // Remover um evento
-  remover(id: number): Observable<void> {
-    return this.http.delete<void>(this.url + '/' + id).pipe(
-      catchError((err) => {
-        console.error('Erro ao remover evento', err);
-        return throwError(() => err);
-      }),
-    );
+  // Método de remover (exclusão lógica)
+  remover(id: number): Observable<any> {
+    return this.http.put<any>(this.url + '/excluir/' + id, {});
   }
 }

@@ -61,9 +61,8 @@ export class AcolhidoService {
     return this.http.get<Acolhido>(this.url + '/' + id);
   }
 
-  //Método de remover
-  remover(id: number): Observable<void> {
-    // Faz uma requisição GET passando o ID do acolhido diretamente na URL
-    return this.http.delete<void>(this.url + '/' + id);
+  // Método de remover (exclusão lógica)
+  remover(id: number): Observable<any> {
+    return this.http.put<any>(this.url + '/excluir/' + id, {});
   }
 }
