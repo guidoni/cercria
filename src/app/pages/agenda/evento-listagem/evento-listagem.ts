@@ -17,6 +17,7 @@ import { AcolhidoService } from '../../../services/acolhido/acolhido.service';
 import { FuncionarioService } from '../../../services/funcionario/funcionario.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-calendario-inicial',
@@ -261,5 +262,33 @@ export class EventoListagem implements OnInit, AfterViewInit {
           this.toastr.error('Erro ao registrar');
         },
       });
+  }
+
+  //Método excluir
+  excluir(id: number): void {
+    Swal.fire({
+      title: 'Excluir evento?',
+      text: 'Essa ação não poderá ser revertida.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Excluir',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.eventoService.remover(id).subscribe({
+          next: () => {
+            this.toastr.success('Evento excluído com sucesso!');
+            this.fecharPopup();
+            this.carregarEventos();
+          },
+          error: (err) => {
+            console.error(err);
+            this.toastr.error('Erro ao excluir evento.');
+          },
+        });
+      }
+    });
   }
 }

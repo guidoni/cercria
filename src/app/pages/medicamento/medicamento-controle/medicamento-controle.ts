@@ -96,7 +96,7 @@ export class MedicamentoControle implements OnInit {
   }
 
   // Método de cadastro de medicamentos periódicos
-  salvarProgramacao(): void {
+  salvarProgramacao(form: NgForm): void {
     const usuarioStorage = sessionStorage.getItem('usuario');
 
     if (!usuarioStorage) {
@@ -138,14 +138,12 @@ export class MedicamentoControle implements OnInit {
       diasSemana: this.novaProgramacao.diasSemana.join(','),
     };
 
-    console.log('DADOS ENVIADOS:', this.novaProgramacao);
+    //console.log('DADOS ENVIADOS:', this.novaProgramacao);
     this.controleService.cadastrar(dados).subscribe({
       next: () => {
         this.toastr.success('Medicamento programado com sucesso!');
 
-        setTimeout(() => {
-          this.limparSaidaEsporadica();
-        });
+        form.resetForm();
       },
 
       error: (err) => {
@@ -158,7 +156,7 @@ export class MedicamentoControle implements OnInit {
   }
 
   // Método para salvar saída esporádica
-  salvarSaidaEsporadica(): void {
+  salvarSaidaEsporadica(form: NgForm): void {
     const dados = {
       data: this.novaSaidaEsporadica.dataSaida,
       horario: this.novaSaidaEsporadica.horario,
@@ -179,9 +177,7 @@ export class MedicamentoControle implements OnInit {
     this.controleService.salvarSaidaEsporadica(dados).subscribe({
       next: () => {
         this.toastr.success('Saída registrada!');
-        setTimeout(() => {
-          this.limparSaidaEsporadica();
-        });
+        form.resetForm();
       },
       error: (err) => {
         console.error(err);

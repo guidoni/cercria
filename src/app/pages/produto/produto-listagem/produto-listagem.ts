@@ -52,29 +52,6 @@ export class ProdutoListagem implements OnInit {
     });
   }
 
-  excluir(id: number) {
-    Swal.fire({
-      title: 'Tem certeza?',
-      text: 'Esse medicamento será excluído!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sim, excluir',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.servico.remover(id).subscribe({
-          next: () => {
-            this.produtos.update((lista) => lista.filter((p) => p.id !== id));
-            this.toastr.success('Produto excluído com sucesso!');
-          },
-          error: (err) => {
-            console.error('Erro ao excluir:', err);
-          },
-        });
-      }
-    });
-  }
-
   // Configuração do card
   produtoSelecionado = signal<Produto | null>(null);
 
@@ -103,5 +80,35 @@ export class ProdutoListagem implements OnInit {
     });
 
     this.produtosFiltrados.set(filtrados);
+  }
+
+  //Método excluir
+  excluir(id: number): void {
+    Swal.fire({
+      title: 'Excluir produto?',
+      text: 'Essa ação não poderá ser revertida.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Excluir',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.servico.remover(id).subscribe({
+          next: () => {
+            this.servico.selecionar().subscribe({
+              next: (retorno) => this.produtos.set(retorno),
+            });
+
+            this.toastr.success('Produto excluído com sucesso!');
+          },
+          error: (err) => {
+            console.error(err);
+            this.toastr.error('Erro ao remover produto.');
+          },
+        });
+      }
+    });
   }
 }

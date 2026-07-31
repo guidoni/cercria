@@ -99,18 +99,14 @@ export class MedicamentoEstoque implements OnInit {
   }
 
   // Método para salvar a entrada
-  salvarEntrada(): void {
+  salvarEntrada(form: NgForm): void {
     this.novaEntrada.medicamento!.id = this.medicamentoId;
 
     this.entradaService.cadastrar(this.novaEntrada).subscribe({
       next: () => {
         this.toastr.success('Entrada cadastrada!');
-
         this.carregarEstoque();
-
-        setTimeout(() => {
-          this.limparFormEntrada();
-        });
+        form.resetForm();
       },
 
       error: (err) => {

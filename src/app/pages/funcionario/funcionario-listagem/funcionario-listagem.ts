@@ -8,6 +8,7 @@ import { FuncionarioService } from '../../../services/funcionario/funcionario.se
 import { NgxMaskPipe } from 'ngx-mask';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-funcionario-listagem',
@@ -21,6 +22,8 @@ export class FuncionarioListagem implements OnInit {
 
   // Injeção do serviço responsável pelas operações com funcionários
   private servico = inject(FuncionarioService);
+
+  constructor(private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.servico.selecionar().subscribe({
@@ -59,5 +62,35 @@ export class FuncionarioListagem implements OnInit {
     }
 
     return this.funcionarios();
+  }
+
+  //Método excluir
+  excluir(id: number): void {
+    Swal.fire({
+      title: 'Excluir funcionário?',
+      text: 'Essa ação não poderá ser revertida.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Excluir',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.servico.remover(id).subscribe({
+          next: () => {
+            this.servico.selecionar().subscribe({
+              next: (retorno) => this.funcionarios.set(retorno),
+            });
+
+            this.toastr.success('Funcionário excluído com sucesso!');
+          },
+          error: (err) => {
+            console.error(err);
+            this.toastr.error('Erro ao remover funcionário.');
+          },
+        });
+      }
+    });
   }
 }

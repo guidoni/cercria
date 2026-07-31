@@ -40,7 +40,7 @@
       <div class="produto-panel-body">
         <!-- ENTRADA -->
         @if (abaSelecionada === 'entrada') {
-          <form (ngSubmit)="salvarEntrada()">
+          <form #formEntrada="ngForm" (ngSubmit)="salvarEntrada(formEntrada)">
             <div class="produto-form-grid">
               <div class="produto-campo">
                 <!-- PRODUTO -->
@@ -164,7 +164,7 @@
 
         <!--SAÍDA-->
         @if (abaSelecionada === 'saida') {
-          <form (ngSubmit)="salvarSaida()">
+          <form #formSaida="ngForm" (ngSubmit)="salvarSaida(formSaida)">
             <div class="produto-form-grid">
               <!-- PRODUTO -->
               <div class="produto-campo">

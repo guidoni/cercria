@@ -37,8 +37,8 @@
         <div class="panel-body">
           <div class="section-title">Registrar nova entrada</div>
 
-          <!-- FORMULÁRIO DE ENTRADA D EESTOQUE -->
-          <form #formEntrada="ngForm" (ngSubmit)="salvarEntrada()" class="form-grid">
+          <!-- FORMULÁRIO DE ENTRADA DE ESTOQUE -->
+          <form #formEntrada="ngForm" (ngSubmit)="salvarEntrada(formEntrada)" class="form-grid">
             <!-- QUANTIDADE -->
             <div class="campo">
               <label>Quantidade <span>*</span></label>

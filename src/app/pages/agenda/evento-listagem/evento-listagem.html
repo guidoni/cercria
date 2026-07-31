@@ -50,6 +50,7 @@
       </div>
 
       <div class="popup-footer">
+        <a class="btn-excluir" (click)="excluir(eventoSelecionado.id)"> Excluir </a>
         <button class="btn-editar" [routerLink]="['/agenda/evento-edicao', eventoSelecionado.id]">
           Editar
         </button>

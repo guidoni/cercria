@@ -36,7 +36,11 @@
       <!-- SAÍDA PERIÓDICA -->
       @if (abaAtiva === 'programado') {
         <div class="panel-body">
-          <form class="form-grid" (ngSubmit)="salvarProgramacao()">
+          <form
+            class="form-grid"
+            #formControleP="ngForm"
+            (ngSubmit)="salvarProgramacao(formControleP)"
+          >
             <!-- MEDICAMENTO -->
             <div class="campo">
               <label>Medicamento <span class="asterisco">*</span></label>
@@ -238,7 +242,11 @@
             <div class="form-actions">
               <button type="button" class="btn-limpar" (click)="limparProgramacao()">Limpar</button>
 
-              <button type="submit" class="btn-salvar" (ngSubmit)="salvarProgramacao()">
+              <button
+                type="submit"
+                class="btn-salvar"
+                (ngSubmit)="salvarProgramacao(formControleP)"
+              >
                 Programar saída
               </button>
             </div>
@@ -249,7 +257,11 @@
       <!-- SAÍDA ESPORÁDICA -->
       @if (abaAtiva === 'esporadico') {
         <div class="panel-body">
-          <form class="form-grid" (ngSubmit)="salvarSaidaEsporadica()">
+          <form
+            class="form-grid"
+            #formControleE="ngForm"
+            (ngSubmit)="salvarSaidaEsporadica(formControleE)"
+          >
             <!-- MEDICAMENTO -->
             <div class="campo full">
               <label>Medicamento <span class="asterisco">*</span></label>
@@ -364,7 +376,11 @@
                 Limpar
               </button>
 
-              <button type="submit" class="btn-salvar" (ngSubmit)="salvarSaidaEsporadica()">
+              <button
+                type="submit"
+                class="btn-salvar"
+                (ngSubmit)="salvarSaidaEsporadica(formControleE)"
+              >
                 Registrar saída
               </button>
             </div>

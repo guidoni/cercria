@@ -50,6 +50,7 @@
               <td>
                 <div class="buttons">
                   <a [routerLink]="['/funcionario/edicao', f.id]" class="btn">Editar</a>
+                  <a class="btn-excluir" (click)="excluir(f.id)"> Excluir </a>
                 </div>
               </td>
             </tr>

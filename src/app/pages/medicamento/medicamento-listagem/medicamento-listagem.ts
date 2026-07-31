@@ -36,33 +36,6 @@ export class MedicamentoListagem implements OnInit {
     });
   }
 
-  //Método para exclusão
-  excluir(id: number) {
-    Swal.fire({
-      title: 'Tem certeza?',
-      text: 'Esse medicamento será excluído!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sim, excluir',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.servico.remover(id).subscribe({
-          next: () => {
-            this.medicamentos.update((lista) => lista.filter((m) => m.id !== id));
-            this.medicamentosFiltro.update((lista) => lista.filter((m) => m.id !== id));
-            this.medicamentosFiltrados.update((lista) => lista.filter((m) => m.id !== id));
-
-            this.toastr.success('Medicamento excluído com sucesso!');
-          },
-          error: (err) => {
-            console.error('Erro ao excluir:', err);
-          },
-        });
-      }
-    });
-  }
-
   // Configuração do card
   medicamentoSelecionado = signal<Medicamento | null>(null);
 
@@ -89,5 +62,35 @@ export class MedicamentoListagem implements OnInit {
     );
 
     this.medicamentosFiltrados.set(filtrados);
+  }
+
+  //Método excluir
+  excluir(id: number): void {
+    Swal.fire({
+      title: 'Excluir medicamento?',
+      text: 'Essa ação não poderá ser revertida.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Excluir',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.servico.remover(id).subscribe({
+          next: () => {
+            this.servico.selecionar().subscribe({
+              next: (retorno) => this.medicamentos.set(retorno),
+            });
+
+            this.toastr.success('Medicamento excluído com sucesso!');
+          },
+          error: (err) => {
+            console.error(err);
+            this.toastr.error('Erro ao remover medicamento.');
+          },
+        });
+      }
+    });
   }
 }

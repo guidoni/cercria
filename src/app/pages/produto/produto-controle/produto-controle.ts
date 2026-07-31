@@ -117,13 +117,14 @@ export class ProdutoControle implements OnInit {
   }
 
   // Método de salvar entrada
-  salvarEntrada(): void {
+  salvarEntrada(form: NgForm): void {
     const payload = this.montarPayloadEntrada();
     //console.log('ENTRADA:', payload);
 
     this.controleService.cadastrarEntrada(payload).subscribe({
       next: () => {
         this.toastr.success('Entrada cadastrada com sucesso!');
+        form.resetForm();
       },
       error: (err) => {
         console.error(err);
@@ -133,13 +134,14 @@ export class ProdutoControle implements OnInit {
   }
 
   //Método de salvar saída
-  salvarSaida(): void {
+  salvarSaida(form: NgForm): void {
     const payload = this.montarPayloadSaida();
     //console.log('SAÍDA:', payload);
 
     this.controleService.cadastrarSaida(payload).subscribe({
       next: () => {
         this.toastr.success('Saída cadastrada com sucesso!');
+        form.resetForm();
       },
       error: (err) => {
         console.error(err);
