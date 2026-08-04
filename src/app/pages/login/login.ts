@@ -27,17 +27,14 @@ export class Login {
         senha: this.senha,
       })
       .subscribe({
-        next: (usuario) => {
-          console.log(usuario);
-
-          sessionStorage.setItem('usuario', JSON.stringify(usuario));
-          console.log(usuario);
-
+        next: (resposta) => {
+          sessionStorage.setItem('token', resposta.token);
+          sessionStorage.setItem('usuario', JSON.stringify(resposta.funcionario));
           this.router.navigate(['/home']);
         },
 
         error: (err) => {
-          console.log(err);
+          //console.log(err);
 
           if (err.status === 401) {
             alert('Email ou senha inválidos');
