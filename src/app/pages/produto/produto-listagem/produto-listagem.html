@@ -58,7 +58,7 @@
               <td (click)="abrirDetalhes(p)" class="nome-click">
                 {{ p.nome }}
               </td>
-              <td (click)="abrirDetalhes(p)" class="nome-click">
+              <td [routerLink]="['/produto/historico', p.id]" class="nome-click">
                 {{ quantidades[p.id] || 0 }}
               </td>
               <td (click)="abrirDetalhes(p)" class="nome-click">

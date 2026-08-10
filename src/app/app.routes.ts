@@ -26,6 +26,7 @@ import { PatrimonioListagem } from './pages/patrimonio/patrimonio-listagem/patri
 import { PatrimonioEdicao } from './pages/patrimonio/patrimonio-edicao/patrimonio-edicao';
 import { PatrimonioCadastro } from './pages/patrimonio/patrimonio-cadastro/patrimonio-cadastro';
 import { canDeactivateGuard } from './guards/can-deactivate-guard';
+import { ProdutoHistorico } from './pages/produto/produto-historico/produto-historico';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -115,6 +116,12 @@ export const routes: Routes = [
       {
         path: 'controle',
         component: ProdutoControle,
+        canActivate: [authGuard],
+        canDeactivate: [canDeactivateGuard],
+      },
+      {
+        path: 'historico/:id',
+        component: ProdutoHistorico,
         canActivate: [authGuard],
         canDeactivate: [canDeactivateGuard],
       },

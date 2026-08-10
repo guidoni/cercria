@@ -25,6 +25,18 @@ export class ControleProdutoService {
     );
   }
 
+  listarEntradasPorProduto(produtoId: number): Observable<EntradaProduto[]> {
+    return this.http.get<EntradaProduto[]>(`${this.url}/entrada/produto/${produtoId}`);
+  }
+
+  listarEntradas(): Observable<EntradaProduto[]> {
+    return this.http.get<EntradaProduto[]>(`${this.url}/entrada/listagem`);
+  }
+
+  excluirEntrada(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/entrada/${id}`);
+  }
+
   cadastrarSaida(dados: any): Observable<any> {
     return this.http.post<any>(`${this.url}/saida/cadastro`, dados).pipe(
       catchError((err) => {
@@ -32,6 +44,18 @@ export class ControleProdutoService {
         return throwError(() => err);
       }),
     );
+  }
+
+  listarSaidas(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}/saida/listagem`);
+  }
+
+  listarSaidasPorProduto(produtoId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}/saida/produto/${produtoId}`);
+  }
+
+  excluirSaida(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/saida/${id}`);
   }
 
   listarPorProduto(produtoId: number): Observable<EntradaProduto[]> {
