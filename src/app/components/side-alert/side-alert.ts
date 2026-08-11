@@ -22,7 +22,7 @@ export class SideAlert {
   ngOnInit() {
     this.alertaService.selecionar().subscribe({
       next: (res) => {
-        console.log('ALERTAS:', res);
+        //console.log('ALERTAS:', res);
         this.alerts = res;
         this.cdr.detectChanges();
       },
