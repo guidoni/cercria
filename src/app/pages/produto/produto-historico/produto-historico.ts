@@ -30,22 +30,18 @@ export class ProdutoHistorico implements OnInit {
 
   quantidades: { [produtoId: number]: number } = {};
 
-  //Filtro
-  filtroNome: string = '';
-  filtroCategoria: string = '';
-
   produtoSelecionado: Produto | null = null;
-
-  entradas: EntradaProduto[] = [];
-  saidas: any[] = [];
 
   abaSelecionada: 'entradas' | 'saidas' = 'entradas';
 
   carregandoHistorico = false;
 
-  ngOnInit(): void {
-    this.carregarProdutos();
-  }
+  entradas: EntradaProduto[] = [];
+  saidas: any[] = [];
+
+  produtoId!: number;
+
+  ngOnInit(): void {}
 
   carregarProdutos(): void {
     this.servico.selecionar().subscribe({
@@ -84,28 +80,17 @@ export class ProdutoHistorico implements OnInit {
     });
   }
 
-  filtrar(): void {
-    this.produtosFiltrados = this.produtosFiltro.filter((p) => {
-      const nomeOk = p.nome.toLowerCase().includes(this.filtroNome.toLowerCase());
-      const categoriaOk = !this.filtroCategoria || p.categoria === this.filtroCategoria;
-      return nomeOk && categoriaOk;
-    });
-  }
-
   abrirHistorico(produto: Produto): void {
-    this.produtoSelecionado = produto;
+    console.log('CLIQUEI NO PRODUTO:', produto);
+    console.log('ID DO PRODUTO:', produto.id);
 
-    // Começa sempre pela aba de entradas
+    this.produtoSelecionado = produto;
     this.abaSelecionada = 'entradas';
 
-    // Limpa históricos anteriores
     this.entradas = [];
     this.saidas = [];
 
-    // Busca as entradas
     this.carregarEntradas(produto.id);
-
-    // Busca as saídas
     this.carregarSaidas(produto.id);
   }
 
@@ -126,15 +111,20 @@ export class ProdutoHistorico implements OnInit {
 
   carregarEntradas(produtoId: number): void {
     this.carregandoHistorico = true;
+
+    console.log('Buscando entradas do produto:', produtoId);
+
     this.controleService.listarPorProduto(produtoId).subscribe({
       next: (lista) => {
-        this.entradas = lista;
+        console.log('ENTRADAS RECEBIDAS:', lista);
 
+        this.entradas = lista;
         this.carregandoHistorico = false;
       },
 
       error: (err) => {
-        console.error('Erro ao carregar entradas:', err);
+        console.error('ERRO AO CARREGAR ENTRADAS:', err);
+
         this.toastr.error('Erro ao carregar histórico de entradas.');
         this.carregandoHistorico = false;
       },
@@ -142,13 +132,17 @@ export class ProdutoHistorico implements OnInit {
   }
 
   carregarSaidas(produtoId: number): void {
+    console.log('Buscando saídas do produto:', produtoId);
+
     this.controleService.listarSaidasPorProduto(produtoId).subscribe({
       next: (lista) => {
+        console.log('SAÍDAS RECEBIDAS:', lista);
+
         this.saidas = lista;
       },
 
       error: (err) => {
-        console.error('Erro ao carregar saídas:', err);
+        console.error('ERRO AO CARREGAR SAÍDAS:', err);
 
         this.toastr.error('Erro ao carregar histórico de saídas.');
       },
