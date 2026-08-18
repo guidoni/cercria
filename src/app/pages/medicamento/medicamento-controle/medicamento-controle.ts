@@ -100,15 +100,19 @@ export class MedicamentoControle implements OnInit {
     const usuarioStorage = sessionStorage.getItem('usuario');
 
     if (!usuarioStorage) {
-      this.toastr.error('Usuário não encontrado.');
+      this.toastr.error('Funcionário logado não encontrado.');
       return;
     }
 
     const usuario = JSON.parse(usuarioStorage);
-    const funcionario = this.funcionarios.find((f) => f.id === usuario.id);
 
-    if (!funcionario) {
+    if (!usuario?.id) {
       this.toastr.error('Funcionário logado não encontrado.');
+      return;
+    }
+
+    if (!this.novaProgramacao.medicamento?.id) {
+      this.toastr.error('Selecione um medicamento.');
       return;
     }
 
@@ -116,8 +120,9 @@ export class MedicamentoControle implements OnInit {
       id: this.acolhidoId,
     };
 
+    // Funcionário que está cadastrando a programação
     this.novaProgramacao.funcionarioCadastro = {
-      id: funcionario.id,
+      id: usuario.id,
     };
 
     this.novaProgramacao.diasSemana = Array.isArray(this.novaProgramacao.diasSemana)
@@ -128,29 +133,38 @@ export class MedicamentoControle implements OnInit {
       this.novaProgramacao.dataFim = undefined;
     }
 
-    if (!this.novaProgramacao.medicamento?.id) {
-      this.toastr.error('Selecione um medicamento');
-      return;
-    }
-
     const dados = {
       ...this.novaProgramacao,
       diasSemana: this.novaProgramacao.diasSemana.join(','),
     };
 
-    //console.log('DADOS ENVIADOS:', this.novaProgramacao);
+    console.log('USUÁRIO LOGADO:', usuario);
+    console.log('DADOS ENVIADOS:', dados);
+
     this.controleService.cadastrar(dados).subscribe({
       next: () => {
         this.toastr.success('Medicamento programado com sucesso!');
 
         form.resetForm();
+
+        this.novaProgramacao = new ControleUsoMedicamento();
+
+        this.novaProgramacao.acolhido = {
+          id: this.acolhidoId,
+        };
       },
 
       error: (err) => {
-        //console.error('ERRO COMPLETO:', err);
-        //console.error('BODY:', err.error);
+        console.error('ERRO AO CADASTRAR:', err);
+        console.error('RESPOSTA DO BACKEND:', err.error);
 
-        this.toastr.error(JSON.stringify(err.error));
+        if (typeof err.error === 'string') {
+          this.toastr.error(err.error);
+        } else if (err.error?.message) {
+          this.toastr.error(err.error.message);
+        } else {
+          this.toastr.error('Erro ao cadastrar programação.');
+        }
       },
     });
   }
