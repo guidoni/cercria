@@ -28,15 +28,15 @@ export class Login {
       })
       .subscribe({
         next: (resposta) => {
-          console.log('RESPOSTA DO LOGIN:', resposta);
+          //console.log('RESPOSTA DO LOGIN:', resposta);
 
           const usuario = resposta.funcionario;
 
           sessionStorage.setItem('usuario', JSON.stringify(usuario));
           sessionStorage.setItem('token', resposta.token);
 
-          console.log('FUNCIONÁRIO LOGADO:', usuario);
-          console.log('ID:', usuario.id);
+          //console.log('FUNCIONÁRIO LOGADO:', usuario);
+          //console.log('ID:', usuario.id);
 
           this.router.navigate(['/home']);
         },
