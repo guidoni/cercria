@@ -49,7 +49,6 @@ export class MedicamentoControle implements OnInit {
   ngOnInit(): void {
     //Pega o usuário logado
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
-
     this.usuarioLogado = usuario.id;
 
     this.novaSaidaEsporadica.responsavel = {
@@ -100,19 +99,29 @@ export class MedicamentoControle implements OnInit {
     const usuarioStorage = sessionStorage.getItem('usuario');
 
     if (!usuarioStorage) {
-      this.toastr.error('Funcionário logado não encontrado.');
+      this.toastr.error('Usuário não encontrado.');
       return;
     }
 
     const usuario = JSON.parse(usuarioStorage);
 
-    if (!usuario?.id) {
+    //console.log('USUÁRIO DO SESSION STORAGE:', usuario);
+
+    const funcionarioId = usuario.id;
+
+    if (!funcionarioId) {
       this.toastr.error('Funcionário logado não encontrado.');
+      console.error('ID do funcionário não encontrado:', usuario);
       return;
     }
 
-    if (!this.novaProgramacao.medicamento?.id) {
-      this.toastr.error('Selecione um medicamento.');
+    if (!this.novaProgramacao.dataInicio) {
+      this.toastr.error('Informe a data de início.');
+      return;
+    }
+
+    if (!this.novaProgramacao.usoContinuo && !this.novaProgramacao.dataFim) {
+      this.toastr.error('Marque "Uso contínuo" ou informe uma data de fim.');
       return;
     }
 
@@ -120,9 +129,8 @@ export class MedicamentoControle implements OnInit {
       id: this.acolhidoId,
     };
 
-    // Funcionário que está cadastrando a programação
     this.novaProgramacao.funcionarioCadastro = {
-      id: usuario.id,
+      id: funcionarioId,
     };
 
     this.novaProgramacao.diasSemana = Array.isArray(this.novaProgramacao.diasSemana)
@@ -133,38 +141,27 @@ export class MedicamentoControle implements OnInit {
       this.novaProgramacao.dataFim = undefined;
     }
 
+    if (!this.novaProgramacao.medicamento?.id) {
+      this.toastr.error('Selecione um medicamento.');
+      return;
+    }
+
     const dados = {
       ...this.novaProgramacao,
       diasSemana: this.novaProgramacao.diasSemana.join(','),
     };
-
-    console.log('USUÁRIO LOGADO:', usuario);
-    console.log('DADOS ENVIADOS:', dados);
 
     this.controleService.cadastrar(dados).subscribe({
       next: () => {
         this.toastr.success('Medicamento programado com sucesso!');
 
         form.resetForm();
-
-        this.novaProgramacao = new ControleUsoMedicamento();
-
-        this.novaProgramacao.acolhido = {
-          id: this.acolhidoId,
-        };
       },
 
       error: (err) => {
-        console.error('ERRO AO CADASTRAR:', err);
-        console.error('RESPOSTA DO BACKEND:', err.error);
+        console.error('Erro:', err);
 
-        if (typeof err.error === 'string') {
-          this.toastr.error(err.error);
-        } else if (err.error?.message) {
-          this.toastr.error(err.error.message);
-        } else {
-          this.toastr.error('Erro ao cadastrar programação.');
-        }
+        this.toastr.error(err.error?.message || 'Erro ao cadastrar programação.');
       },
     });
   }

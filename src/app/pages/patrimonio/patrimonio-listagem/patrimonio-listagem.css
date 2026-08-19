@@ -1,6 +1,6 @@
 .main-container {
   display: flex;
-  align-items: flex-start;
+  flex: 1;
 }
 
 .form-list-panel {
@@ -299,4 +299,47 @@ td:nth-child(3) {
 .breadcrumb span:last-child {
   color: #5a6a9a;
   font-weight: 400;
+}
+
+.paginacao {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 25px;
+  margin-left: 25%;
+  margin-bottom: 10px;
+}
+
+.pagina-btn {
+  border: none;
+  padding: 10px 14px;
+  border-radius: 7px;
+  background: #f1f3f7;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.pagina-btn:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.pagina-btn.ativa {
+  background: #1e3b8a;
+  color: white;
+}
+
+.pagina-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reticencias {
+  padding: 10px 4px;
+  color: #6b7280;
+  font-size: 14px;
 }

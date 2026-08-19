@@ -93,4 +93,77 @@ export class MedicamentoListagem implements OnInit {
       }
     });
   }
+
+  //Paginação
+  paginaAtual: number = 1;
+  itensPorPagina: number = 5;
+
+  // Total de páginas
+  get totalPaginas(): number {
+    return Math.ceil(this.medicamentosFiltrados().length / this.itensPorPagina);
+  }
+
+  // Medicamentos da página atual
+  medicamentosPaginados(): Medicamento[] {
+    const lista = this.medicamentosFiltrados();
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    const fim = inicio + this.itensPorPagina;
+
+    return lista.slice(inicio, fim);
+  }
+
+  get paginasVisiveis(): (number | string)[] {
+    const total = this.totalPaginas;
+    const atual = this.paginaAtual;
+
+    // Nenhuma página
+    if (total === 0) {
+      return [];
+    }
+
+    // Até 5 páginas
+    if (total <= 5) {
+      return Array.from({ length: total }, (_, i) => i + 1);
+    }
+
+    // Começo
+    // 1 2 3 ... 10
+    if (atual <= 3) {
+      return [1, 2, 3, '...', total];
+    }
+
+    // Final
+    // 1 ... 8 9 10
+    if (atual >= total - 2) {
+      return [1, '...', total - 2, total - 1, total];
+    }
+
+    // Meio
+    // 1 ... 4 5 6 ... 10
+    return [1, '...', atual - 1, atual, atual + 1, '...', total];
+  }
+
+  irParaPagina(pagina: number | string): void {
+    if (typeof pagina === 'string') {
+      return;
+    }
+
+    if (pagina < 1 || pagina > this.totalPaginas) {
+      return;
+    }
+
+    this.paginaAtual = pagina;
+  }
+
+  paginaAnterior(): void {
+    if (this.paginaAtual > 1) {
+      this.paginaAtual--;
+    }
+  }
+
+  proximaPagina(): void {
+    if (this.paginaAtual < this.totalPaginas) {
+      this.paginaAtual++;
+    }
+  }
 }

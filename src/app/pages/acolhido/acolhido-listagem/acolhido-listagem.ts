@@ -92,4 +92,80 @@ export class AcolhidoListagem {
       }
     });
   }
+
+  // Paginação
+  paginaAtual: number = 1;
+
+  itensPorPagina: number = 5;
+
+  // Total de páginas
+  get totalPaginas(): number {
+    return Math.ceil(this.filtrarAcolhidos().length / this.itensPorPagina);
+  }
+
+  // Acolhidos que serão exibidos na página atual
+  acolhidosPaginados() {
+    const lista = this.filtrarAcolhidos();
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    const fim = inicio + this.itensPorPagina;
+
+    return lista.slice(inicio, fim);
+  }
+
+  // Páginas que aparecem nos botões
+  get paginasVisiveis(): (number | string)[] {
+    const total = this.totalPaginas;
+    const atual = this.paginaAtual;
+
+    // Se tiver até 5 páginas,
+    // mostra todas
+    if (total <= 5) {
+      return Array.from({ length: total }, (_, i) => i + 1);
+    }
+
+    // Exemplo:
+    // 1 2 3 ... 10
+    if (atual <= 3) {
+      return [1, 2, 3, '...', total];
+    }
+
+    // Exemplo:
+    // 1 ... 8 9 10
+    if (atual >= total - 2) {
+      return [1, '...', total - 2, total - 1, total];
+    }
+
+    // Exemplo:
+    // 1 ... 4 5 6 ... 10
+    return [1, '...', atual - 1, atual, atual + 1, '...', total];
+  }
+
+  // Ir para uma página específica
+  irParaPagina(pagina: number | string): void {
+    // Se for "..." não faz nada
+    if (typeof pagina === 'string') {
+      return;
+    }
+
+    // Evita páginas inválidas
+    if (pagina < 1 || pagina > this.totalPaginas) {
+      return;
+    }
+
+    this.paginaAtual = pagina;
+  }
+
+  // Página anterior
+  paginaAnterior(): void {
+    if (this.paginaAtual > 1) {
+      this.paginaAtual--;
+    }
+  }
+
+  // Próxima página
+  proximaPagina(): void {
+    if (this.paginaAtual < this.totalPaginas) {
+      this.paginaAtual++;
+    }
+  }
 }
