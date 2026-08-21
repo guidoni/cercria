@@ -31,14 +31,26 @@ export class PatrimonioCadastro {
 
   //Método de cadastro
   cadastrar(form: any): void {
-    this.servico.cadastrar(this.patrimonio).subscribe((retorno) => {
-      this.patrimonios.push(retorno);
+    if (form.invalid) {
+      form.control.markAllAsTouched();
+      this.toastr.error('Preencha todos os campos obrigatórios corretamente!');
+      return;
+    }
 
-      this.patrimonio = new Patrimonio();
-      form.reset();
+    this.servico.cadastrar(this.patrimonio).subscribe({
+      next: (retorno) => {
+        this.patrimonios.push(retorno);
 
-      this.toastr.success('Patrimônio cadastrado com sucesso!');
-      this.router.navigate(['/patrimonio/listagem']);
+        this.patrimonio = new Patrimonio();
+        form.reset();
+
+        this.toastr.success('Patrimônio cadastrado com sucesso!');
+        this.router.navigate(['/patrimonio/listagem']);
+      },
+      error: (err) => {
+        console.error(err);
+        this.toastr.error('Erro ao cadastrar patrimônio!');
+      },
     });
   }
 

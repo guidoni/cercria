@@ -37,14 +37,19 @@
 
       <!-- DATA DE AQUISIÇÃO -->
       <div class="campo">
-        <label>Data de aquisição</label>
+        <label>Data de aquisição <span>*</span></label>
+
         <input
           type="date"
           name="data"
-          placeholder="Digite o nome do produto"
           required
           [(ngModel)]="patrimonio.dtAquisicao"
+          #dtAquisicao="ngModel"
         />
+
+        @if (dtAquisicao.invalid && dtAquisicao.touched) {
+          <small class="erro">Data de aquisição é obrigatória</small>
+        }
       </div>
 
       <!-- ESPECIFICAÇÃO -->

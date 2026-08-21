@@ -97,8 +97,18 @@ export class ProdutoListagem implements OnInit {
       if (result.isConfirmed) {
         this.servico.remover(id).subscribe({
           next: () => {
+            delete this.quantidades[id];
+
             this.servico.selecionar().subscribe({
-              next: (retorno) => this.produtos.set(retorno),
+              next: (retorno) => {
+                this.produtos.set(retorno);
+                this.produtosFiltro.set(retorno);
+                this.produtosFiltrados.set(retorno);
+
+                if (this.paginaAtual > this.totalPaginas) {
+                  this.paginaAtual = Math.max(1, this.totalPaginas);
+                }
+              },
             });
 
             this.toastr.success('Produto excluído com sucesso!');

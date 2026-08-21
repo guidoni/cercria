@@ -86,7 +86,7 @@ export class FuncionarioListagem implements OnInit {
             this.toastr.success('Funcionário excluído com sucesso!');
           },
           error: (err) => {
-            console.error(err);
+            //console.error(err);
             this.toastr.error('Erro ao remover funcionário.');
           },
         });
@@ -107,9 +107,7 @@ export class FuncionarioListagem implements OnInit {
   // Acolhidos que serão exibidos na página atual
   funcionariosPaginados() {
     const lista = this.filtrarFuncionarios();
-
     const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
-
     const fim = inicio + this.itensPorPagina;
 
     return lista.slice(inicio, fim);

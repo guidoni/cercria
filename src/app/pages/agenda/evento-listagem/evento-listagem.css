@@ -260,15 +260,10 @@
 
 .campo-recusa {
   width: 100%;
-
   padding: 20px;
-
   box-sizing: border-box;
-
   display: flex;
-
   flex-direction: column;
-
   gap: 10px;
 }
 
@@ -278,38 +273,36 @@
 
 .campo-recusa textarea {
   width: 100%;
-
   min-height: 100px;
-
   padding: 12px;
-
   border: 1px solid #cfcfcf;
-
   border-radius: 10px;
-
   resize: none;
-
   box-sizing: border-box;
-
   font-size: 14px;
 }
 
 .btn-confirmar {
   align-self: flex-end;
-
   padding: 10px 20px;
-
   background: #3b5bb5;
-
   color: white;
-
   border: none;
-
   border-radius: 8px;
-
   cursor: pointer;
 }
 
 .btn-confirmar:hover {
   background: #2b4791;
+}
+
+.fc .fc-more-link {
+  color: var(--cor-secundaria);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.fc .fc-more-link:hover {
+  text-decoration: underline;
 }

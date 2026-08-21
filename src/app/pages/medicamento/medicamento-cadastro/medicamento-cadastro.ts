@@ -31,15 +31,34 @@ export class MedicamentoCadastro {
   medicamento = new Medicamento();
 
   //Método de cadastro
-  cadastrar(form: any): void {
-    this.servico.cadastrar(this.medicamento).subscribe((retorno) => {
-      this.medicamentos.push(retorno);
+  cadastrar(form: NgForm): void {
+    // Verifica se o formulário possui erros
+    if (form.invalid) {
+      form.control.markAllAsTouched();
 
-      this.medicamento = new Medicamento();
-      form.reset();
+      this.toastr.error(
+        'Preencha corretamente todos os campos obrigatórios.',
+        'Formulário inválido',
+      );
 
-      this.toastr.success('Medicamento cadastrado com sucesso!');
-      this.router.navigate(['/medicamento/listagem']);
+      return;
+    }
+
+    this.servico.cadastrar(this.medicamento).subscribe({
+      next: (retorno) => {
+        this.medicamentos.push(retorno);
+        this.medicamento = new Medicamento();
+        form.resetForm();
+
+        this.toastr.success('Medicamento cadastrado com sucesso!', 'Sucesso');
+        this.router.navigate(['/medicamento/listagem']);
+      },
+
+      error: (err) => {
+        console.error('Erro ao cadastrar medicamento:', err);
+
+        this.toastr.error(err.error?.message || 'Erro ao cadastrar medicamento.', 'Erro');
+      },
     });
   }
 

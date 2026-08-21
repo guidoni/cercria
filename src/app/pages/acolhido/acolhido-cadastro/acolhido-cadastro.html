@@ -39,11 +39,13 @@
       <!-- CPF -->
       <div class="campo">
         <label>CPF <span>*</span></label>
+
         <input
           type="text"
           name="cpf"
           mask="000.000.000-00"
           placeholder="Digite o CPF"
+          [required]="true"
           [(ngModel)]="acolhido.cpf"
           #cpf="ngModel"
         />
@@ -209,7 +211,7 @@
           name="tamanhoCamiseta"
           required
           [(ngModel)]="acolhido.tamanhoCamiseta"
-          #tamanho="ngModel"
+          #tamanhoCamisa="ngModel"
         >
           <option value="">Selecione</option>
           <option value="PP">PP</option>
@@ -220,7 +222,7 @@
           <option value="XG">XG</option>
         </select>
 
-        @if (tamanho.invalid && tamanho.touched) {
+        @if (tamanhoCamisa.invalid && tamanhoCamisa.touched) {
           <small class="erro">Tamanho é obrigatório</small>
         }
       </div>
@@ -235,10 +237,10 @@
           max="60"
           required
           [(ngModel)]="acolhido.tamanhoBermudaCalca"
-          #tamanho="ngModel"
+          #tamanhoBermuda="ngModel"
         />
 
-        @if (tamanho.invalid && tamanho.touched) {
+        @if (tamanhoBermuda.invalid && tamanhoBermuda.touched) {
           <small class="erro">Tamanho é obrigatório</small>
         }
       </div>
@@ -253,10 +255,10 @@
           max="45"
           required
           [(ngModel)]="acolhido.tamanhoCalcado"
-          #tamanho="ngModel"
+          #tamanhoCalcado="ngModel"
         />
 
-        @if (tamanho.invalid && tamanho.touched) {
+        @if (tamanhoCalcado.invalid && tamanhoCalcado.touched) {
           <small class="erro">Tamanho é obrigatório</small>
         }
       </div>
@@ -268,7 +270,7 @@
           name="tamanhoRoupaIntima"
           required
           [(ngModel)]="acolhido.tamanhoRoupaIntima"
-          #tamanho="ngModel"
+          #tamanhRoupaI="ngModel"
         >
           <option value="">Selecione</option>
           <option value="PP">PP</option>
@@ -279,7 +281,7 @@
           <option value="XG">XG</option>
         </select>
 
-        @if (tamanho.invalid && tamanho.touched) {
+        @if (tamanhRoupaI.invalid && tamanhRoupaI.touched) {
           <small class="erro">Tamanho é obrigatório</small>
         }
       </div>

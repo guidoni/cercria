@@ -35,25 +35,43 @@ export class EventoListagem implements OnInit, AfterViewInit {
     initialView: 'dayGridMonth',
     locale: ptBrLocale,
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+
     editable: true,
     selectable: true,
+
+    // Máximo de 5 eventos visíveis por dia
+    dayMaxEvents: 3,
+
+    // Ao clicar em "+ X mais", abre o dia
+    moreLinkClick: 'day',
+
+    // Ao clicar no número/célula do dia, abre a visualização daquele dia
+    dateClick: (info) => {
+      const calendarApi = this.calendarComponent.getApi();
+      calendarApi.changeView('timeGridDay', info.date);
+    },
+
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay',
     },
+
     buttonText: {
       today: 'Hoje',
       month: 'Mês',
       week: 'Semana',
       day: 'Dia',
     },
+
     height: 'auto',
     events: [],
+
     eventClick: (info) => {
       const tipo = info.event.extendedProps['tipo'];
       if (tipo === 'medicamento') {
         this.tipoSelecionado = 'medicamento';
+
         this.agendaSelecionada = {
           id: Number(info.event.id),
           acolhido: info.event.extendedProps['acolhido'],
@@ -61,10 +79,12 @@ export class EventoListagem implements OnInit, AfterViewInit {
           horario: info.event.extendedProps['horario'],
           status: info.event.extendedProps['status'],
         };
+
         this.mostrarPopup = true;
         this.cd.detectChanges();
         return;
       }
+
       this.tipoSelecionado = 'evento';
       this.abrirPopup(Number(info.event.id));
     },

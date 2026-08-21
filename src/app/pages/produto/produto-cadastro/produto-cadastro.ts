@@ -32,14 +32,26 @@ export class ProdutoCadastro {
 
   //Método de cadastro
   cadastrar(form: any): void {
-    this.servico.cadastrar(this.produto).subscribe((retorno) => {
-      this.produtos.push(retorno);
+    if (form.invalid) {
+      form.control.markAllAsTouched();
+      this.toastr.error('Preencha todos os campos obrigatórios corretamente!');
+      return;
+    }
 
-      this.produto = new Produto();
-      form.reset();
+    this.servico.cadastrar(this.produto).subscribe({
+      next: (retorno) => {
+        this.produtos.push(retorno);
 
-      this.toastr.success('Produto cadastrado com sucesso!');
-      this.router.navigate(['/produto/listagem']);
+        this.produto = new Produto();
+        form.reset();
+
+        this.toastr.success('Produto cadastrado com sucesso!');
+        this.router.navigate(['/produto/listagem']);
+      },
+      error: (err) => {
+        console.error(err);
+        this.toastr.error('Erro ao cadastrar produto!');
+      },
     });
   }
 

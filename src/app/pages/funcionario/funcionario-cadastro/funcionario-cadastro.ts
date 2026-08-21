@@ -39,23 +39,46 @@ export class FuncionarioCadastro {
   confirmarSenha: string = '';
 
   //Método de cadastro
-  cadastrar(form: any): void {
-    if (this.funcionario.senha !== this.confirmarSenha) {
-      this.toastr.error('As senhas não coincidem!');
+  cadastrar(form: NgForm): void {
+    // Verifica se o formulário possui erros
+    if (form.invalid) {
+      form.control.markAllAsTouched();
+
+      this.toastr.error(
+        'Preencha corretamente todos os campos obrigatórios.',
+        'Formulário inválido',
+      );
+
       return;
     }
 
+    // Verifica se as senhas são iguais
+    if (this.funcionario.senha !== this.confirmarSenha) {
+      this.toastr.error('As senhas não coincidem!', 'Erro');
+
+      return;
+    }
+
+    // Define se o funcionário está ativo
     this.funcionario.ativo = !this.funcionario.dataSaida;
 
-    this.servico.cadastrar(this.funcionario).subscribe((retorno) => {
-      this.funcionarios.push(retorno);
+    this.servico.cadastrar(this.funcionario).subscribe({
+      next: (retorno) => {
+        this.funcionarios.push(retorno);
+        this.funcionario = new Funcionario();
+        this.confirmarSenha = '';
 
-      this.funcionario = new Funcionario();
-      this.confirmarSenha = '';
-      form.reset();
+        form.resetForm();
 
-      this.toastr.success('Funcionário cadastrado com sucesso!');
-      this.router.navigate(['/funcionario/listagem']);
+        this.toastr.success('Funcionário cadastrado com sucesso!', 'Sucesso');
+        this.router.navigate(['/funcionario/listagem']);
+      },
+
+      error: (err) => {
+        console.error('Erro ao cadastrar funcionário:', err);
+
+        this.toastr.error(err.error?.message || 'Erro ao cadastrar funcionário.', 'Erro');
+      },
     });
   }
 

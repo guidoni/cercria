@@ -71,6 +71,13 @@ export class PatrimonioListagem implements OnInit {
     this.patrimoniosFiltrados.set(filtrados);
   }
 
+  limparFiltro(): void {
+    this.filtroNome = '';
+    this.filtroEspecificacao = '';
+
+    this.patrimoniosFiltrados.set(this.patrimoniosFiltro());
+  }
+
   //Método excluir
   excluir(id: number): void {
     Swal.fire({
@@ -87,7 +94,21 @@ export class PatrimonioListagem implements OnInit {
         this.servico.remover(id).subscribe({
           next: () => {
             this.servico.selecionar().subscribe({
-              next: (retorno) => this.patrimonios.set(retorno),
+              next: (retorno) => {
+                // Atualiza todas as listas
+                this.patrimonios.set(retorno);
+                this.patrimoniosFiltro.set(retorno);
+                this.patrimoniosFiltrados.set(retorno);
+
+                // Corrige a página atual caso tenha ficado inválida
+                if (this.paginaAtual > this.totalPaginas) {
+                  this.paginaAtual = Math.max(1, this.totalPaginas);
+                }
+              },
+              error: (err) => {
+                console.error(err);
+                this.toastr.error('Erro ao atualizar a lista.');
+              },
             });
 
             this.toastr.success('Patrimônio excluído com sucesso!');

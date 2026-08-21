@@ -147,11 +147,13 @@
 
       <!-- BOTÕES INFERIORES -->
       <div class="botoes">
-        <button type="button" class="btn-voltar" [routerLink]="['/agenda/listagem']">Voltar</button>
+        <button type="button" class="btn-voltar" [routerLink]="['/agenda/listagem']">
+          <b>Voltar</b>
+        </button>
 
         <div class="botoes-direita">
-          <button type="reset" class="btn-limpar">Limpar</button>
-          <button type="submit" class="btn-salvar" [disabled]="form.invalid">Salvar</button>
+          <button type="reset" class="btn-limpar"><b>Limpar</b></button>
+          <button type="submit" class="btn-salvar" [disabled]="form.invalid"><b>Salvar</b></button>
         </div>
       </div>
     </form>

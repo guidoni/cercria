@@ -33,17 +33,36 @@ export class AcolhidoCadastro {
   acolhido = new Acolhido();
 
   //Método de cadastro
-  cadastrar(form: any): void {
+  cadastrar(form: NgForm): void {
+    // Impede o cadastro se houver qualquer erro no formulário
+    if (form.invalid) {
+      form.control.markAllAsTouched();
+
+      this.toastr.error(
+        'Preencha corretamente todos os campos obrigatórios.',
+        'Formulário inválido',
+      );
+
+      return;
+    }
+
+    // Define se o acolhido está ativo
     this.acolhido.ativo = !this.acolhido.dataSaida;
 
-    this.servico.cadastrar(this.acolhido).subscribe((retorno) => {
-      this.acolhidos.push(retorno);
+    this.servico.cadastrar(this.acolhido).subscribe({
+      next: (retorno) => {
+        this.acolhidos.push(retorno);
+        this.acolhido = new Acolhido();
+        form.resetForm();
+        this.toastr.success('Acolhido cadastrado com sucesso!');
+        this.router.navigate(['/acolhido/listagem']);
+      },
 
-      this.acolhido = new Acolhido();
-      form.reset();
+      error: (err) => {
+        console.error('Erro ao cadastrar acolhido:', err);
 
-      this.toastr.success('Acolhido cadastrado com sucesso!');
-      this.router.navigate(['/acolhido/listagem']);
+        this.toastr.error(err.error?.message || 'Erro ao cadastrar acolhido.', 'Erro');
+      },
     });
   }
 

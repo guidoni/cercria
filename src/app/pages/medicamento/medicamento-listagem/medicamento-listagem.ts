@@ -80,7 +80,21 @@ export class MedicamentoListagem implements OnInit {
         this.servico.remover(id).subscribe({
           next: () => {
             this.servico.selecionar().subscribe({
-              next: (retorno) => this.medicamentos.set(retorno),
+              next: (retorno) => {
+                // Atualiza TODAS as listas utilizadas pela tela
+                this.medicamentos.set(retorno);
+                this.medicamentosFiltro.set(retorno);
+                this.medicamentosFiltrados.set(retorno);
+
+                // Volta para a primeira página se necessário
+                if (this.paginaAtual > this.totalPaginas) {
+                  this.paginaAtual = Math.max(1, this.totalPaginas);
+                }
+              },
+              error: (err) => {
+                console.error(err);
+                this.toastr.error('Erro ao atualizar a lista.');
+              },
             });
 
             this.toastr.success('Medicamento excluído com sucesso!');

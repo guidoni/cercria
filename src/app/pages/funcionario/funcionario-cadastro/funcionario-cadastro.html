@@ -43,6 +43,7 @@
           name="telefone"
           placeholder="(xx) xxxxx-xxxx"
           mask="(00) 00000-0000"
+          [required]="true"
           [(ngModel)]="funcionario.telefone"
           #telefone="ngModel"
         />
@@ -97,6 +98,7 @@
           name="cpf"
           placeholder="Digite o CPF"
           mask="000.000.000-00"
+          [required]="true"
           [(ngModel)]="funcionario.cpf"
           #cpf="ngModel"
         />
