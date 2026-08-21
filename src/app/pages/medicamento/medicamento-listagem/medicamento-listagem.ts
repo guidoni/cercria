@@ -8,6 +8,9 @@ import { MedicamentoService } from '../../../services/medicamento/medicamento.se
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { MedicamentoEstoqueService } from '../../../services/medicamento/estoque-medicamento.service';
+import { ControleMedicamentoService } from '../../../services/medicamento/medicamento-controle.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-medicamento-listagem',
@@ -18,10 +21,16 @@ import Swal from 'sweetalert2';
 export class MedicamentoListagem implements OnInit {
   // Signals para armazenar listas vindas dos serviços
   medicamentos = signal<Medicamento[]>([]);
+  quantidades: { [medicamentoId: number]: number } = {};
 
   // Injeção do serviço responsável pelas operações com medicamentos
   private servico = inject(MedicamentoService);
-  constructor(private toastr: ToastrService) {}
+  private estoqueService = inject(MedicamentoEstoqueService);
+
+  constructor(
+    private toastr: ToastrService,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.servico.selecionar().subscribe({
@@ -29,9 +38,25 @@ export class MedicamentoListagem implements OnInit {
         this.medicamentos.set(lista);
         this.medicamentosFiltro.set(lista);
         this.medicamentosFiltrados.set(lista);
+
+        // Busca a quantidade disponível de cada medicamento
+        lista.forEach((medicamento) => {
+          this.estoqueService.listarPorMedicamento(medicamento.id!).subscribe({
+            next: (entradas) => {
+              this.quantidades[medicamento.id!] = entradas.reduce(
+                (total, entrada) => total + (entrada.quantidade_atual ?? 0),
+                0,
+              );
+            },
+            error: (err) => {
+              console.error(`Erro ao buscar estoque do medicamento ${medicamento.id}:`, err);
+              this.quantidades[medicamento.id!] = 0;
+            },
+          });
+        });
       },
       error: (err) => {
-        console.error('erro:', err);
+        console.error('Erro ao carregar medicamentos:', err);
       },
     });
   }

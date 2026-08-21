@@ -115,6 +115,7 @@ h2 {
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   margin-bottom: 8px;
 }
 
@@ -122,6 +123,7 @@ table {
   width: 90%;
   border-collapse: collapse;
   margin: 8px auto 20px;
+  table-layout: fixed;
 }
 
 thead tr {
@@ -138,6 +140,7 @@ th {
   text-transform: uppercase;
   letter-spacing: 0.07em;
   background: #eaedfa;
+  vertical-align: middle;
 }
 
 td {
@@ -146,6 +149,10 @@ td {
   color: #1a2540;
   text-align: left;
   border-bottom: 1px solid #dde3f5;
+}
+
+th:last-child {
+  text-align: center;
 }
 
 tbody tr:hover {
@@ -158,17 +165,17 @@ tbody tr:last-child td {
 
 th:first-child,
 td:first-child {
-  width: 70%;
+  width: 50%;
 }
 th:last-child,
 td:last-child {
-  width: 30%;
+  width: 40%;
 }
 
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 15px;
 }
 
 .buttons .btn {
@@ -257,14 +264,12 @@ td:last-child {
 }
 
 .paginacao {
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin-top: 25px;
-  margin-left: 25%;
-  margin-bottom: 10px;
+  margin: 20px auto 10px;
 }
 
 .pagina-btn {

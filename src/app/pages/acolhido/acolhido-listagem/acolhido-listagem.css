@@ -95,6 +95,7 @@ h2 {
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   margin-bottom: 8px;
 }
 
@@ -138,11 +139,15 @@ tbody tr:last-child td {
 
 th:first-child,
 td:first-child {
-  width: 70%;
+  width: 60%;
 }
 th:last-child,
 td:last-child {
-  width: 30%;
+  width: 40%;
+}
+
+th:last-child {
+  text-align: center;
 }
 
 .buttons {
@@ -269,14 +274,12 @@ td:last-child {
 }
 
 .paginacao {
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin-top: 25px;
-  margin-left: 20%;
-  margin-bottom: 10px;
+  margin: 20px auto 10px;
 }
 
 .pagina-btn {

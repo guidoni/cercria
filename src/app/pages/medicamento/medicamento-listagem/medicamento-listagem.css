@@ -8,6 +8,7 @@
   width: 95%;
   min-height: 60vh;
   margin: 50px;
+  padding-bottom: 25px;
   box-shadow: 0 4px 24px rgba(30, 59, 138, 0.1);
   border-radius: 14px;
   display: flex;
@@ -108,23 +109,24 @@ h2 {
 .list-panel {
   width: 100%;
   display: flex;
-  justify-content: center;
-  margin-bottom: 8px;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 table {
   width: 90%;
-  border-collapse: collapse;
-  margin: 8px auto 20px;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px auto 0;
 }
 
 thead tr {
   background: #eaedfa;
-  border-bottom: 2px solid #cdd5ee;
 }
 
 th {
-  padding: 13px 16px;
+  padding: 16px 20px;
   text-align: left;
   font-size: 13px;
   font-weight: 700;
@@ -132,46 +134,63 @@ th {
   text-transform: uppercase;
   letter-spacing: 0.07em;
   background: #eaedfa;
+  border-bottom: 2px solid #cdd5ee;
 }
 
 td {
-  padding: 14px 16px;
+  padding: 20px 20px;
   font-size: 16px;
   color: #1a2540;
   text-align: left;
   border-bottom: 1px solid #dde3f5;
+  vertical-align: middle;
+}
+
+th:last-child {
+  text-align: center;
+}
+
+tbody tr {
+  height: 70px;
 }
 
 tbody tr:hover {
   background: #f0f3ff;
 }
 
-tbody tr:last-child td {
-  border-bottom: none;
-}
-
 th:first-child,
 td:first-child {
-  width: 70%;
+  width: 30%;
 }
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 25%;
+  text-align: center;
+}
+
 th:last-child,
 td:last-child {
-  width: 30%;
+  width: 20%;
 }
 
 .buttons {
   display: flex;
-  justify-content: center;
-  gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
 }
 
-.buttons .btn {
-  width: auto;
-  height: auto;
-  padding: 7px 16px;
-  font-size: 16px;
-  font-weight: 600;
-  box-shadow: none;
+.buttons .btn,
+.buttons .btn-editar,
+.buttons .btnEstoque,
+.buttons .btn-excluir {
+  min-width: 82px;
+  height: 42px;
+  padding: 8px 14px;
+  font-size: 15px;
+  box-sizing: border-box;
 }
 
 .buttons .btn:first-child {
@@ -234,7 +253,7 @@ td:last-child {
 
 .top-actions {
   width: 90%;
-  margin: 20px auto;
+  margin: 25px auto 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -317,14 +336,12 @@ td:last-child {
 }
 
 .paginacao {
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin-top: 25px;
-  margin-left: 25%;
-  margin-bottom: 10px;
+  margin: 10px auto 20px;
 }
 
 .pagina-btn {

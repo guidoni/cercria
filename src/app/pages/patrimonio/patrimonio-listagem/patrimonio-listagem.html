@@ -65,37 +65,37 @@
             </tr>
           }
         </tbody>
-        <div class="paginacao">
-          <!-- ANTERIOR -->
-          <button class="pagina-btn" [disabled]="paginaAtual === 1" (click)="paginaAnterior()">
-            ‹ Anterior
-          </button>
-
-          <!-- NÚMEROS -->
-          @for (pagina of paginasVisiveis; track $index) {
-            @if (pagina === '...') {
-              <span class="reticencias"> ... </span>
-            } @else {
-              <button
-                class="pagina-btn"
-                [class.ativa]="paginaAtual === pagina"
-                (click)="irParaPagina(pagina)"
-              >
-                {{ pagina }}
-              </button>
-            }
-          }
-
-          <!-- PRÓXIMA -->
-          <button
-            class="pagina-btn"
-            [disabled]="paginaAtual === totalPaginas"
-            (click)="proximaPagina()"
-          >
-            Próxima ›
-          </button>
-        </div>
       </table>
+      <div class="paginacao">
+        <!-- ANTERIOR -->
+        <button class="pagina-btn" [disabled]="paginaAtual === 1" (click)="paginaAnterior()">
+          ‹ Anterior
+        </button>
+
+        <!-- NÚMEROS -->
+        @for (pagina of paginasVisiveis; track $index) {
+          @if (pagina === '...') {
+            <span class="reticencias"> ... </span>
+          } @else {
+            <button
+              class="pagina-btn"
+              [class.ativa]="paginaAtual === pagina"
+              (click)="irParaPagina(pagina)"
+            >
+              {{ pagina }}
+            </button>
+          }
+        }
+
+        <!-- PRÓXIMA -->
+        <button
+          class="pagina-btn"
+          [disabled]="paginaAtual === totalPaginas"
+          (click)="proximaPagina()"
+        >
+          Próxima ›
+        </button>
+      </div>
 
       <!-- CARD -->
       @if (patrimoniosSelecionado()) {

@@ -33,6 +33,7 @@
         <thead>
           <tr>
             <th>Nome</th>
+            <th>Quantidade</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -43,48 +44,50 @@
               <td (click)="abrirDetalhes(m)" class="nome-click">
                 {{ m.nome }}
               </td>
-
+              <td>
+                {{ quantidades[m.id] || 0 }}
+              </td>
               <td>
                 <div class="buttons">
-                  <a [routerLink]="['/medicamento/estoque', m.id]" class="btnEstoque">Entrada</a>
-                  <a [routerLink]="['/medicamento/edicao', m.id]" class="btn-editar">Editar</a>
+                  <a [routerLink]="['/medicamento/estoque', m.id]" class="btnEstoque"> Entrada </a>
+                  <a [routerLink]="['/medicamento/edicao', m.id]" class="btn-editar"> Editar </a>
                   <button (click)="excluir(m.id!)" class="btn-excluir">Excluir</button>
                 </div>
               </td>
             </tr>
           }
         </tbody>
-        <div class="paginacao">
-          <!-- ANTERIOR -->
-          <button class="pagina-btn" [disabled]="paginaAtual === 1" (click)="paginaAnterior()">
-            ‹ Anterior
-          </button>
-
-          <!-- NÚMEROS -->
-          @for (pagina of paginasVisiveis; track $index) {
-            @if (pagina === '...') {
-              <span class="reticencias"> ... </span>
-            } @else {
-              <button
-                class="pagina-btn"
-                [class.ativa]="paginaAtual === pagina"
-                (click)="irParaPagina(pagina)"
-              >
-                {{ pagina }}
-              </button>
-            }
-          }
-
-          <!-- PRÓXIMA -->
-          <button
-            class="pagina-btn"
-            [disabled]="paginaAtual === totalPaginas"
-            (click)="proximaPagina()"
-          >
-            Próxima ›
-          </button>
-        </div>
       </table>
+      <div class="paginacao">
+        <!-- ANTERIOR -->
+        <button class="pagina-btn" [disabled]="paginaAtual === 1" (click)="paginaAnterior()">
+          ‹ Anterior
+        </button>
+
+        <!-- NÚMEROS -->
+        @for (pagina of paginasVisiveis; track $index) {
+          @if (pagina === '...') {
+            <span class="reticencias"> ... </span>
+          } @else {
+            <button
+              class="pagina-btn"
+              [class.ativa]="paginaAtual === pagina"
+              (click)="irParaPagina(pagina)"
+            >
+              {{ pagina }}
+            </button>
+          }
+        }
+
+        <!-- PRÓXIMA -->
+        <button
+          class="pagina-btn"
+          [disabled]="paginaAtual === totalPaginas"
+          (click)="proximaPagina()"
+        >
+          Próxima ›
+        </button>
+      </div>
 
       <!-- CARD -->
       @if (medicamentoSelecionado()) {
